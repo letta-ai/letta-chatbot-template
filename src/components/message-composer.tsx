@@ -34,7 +34,7 @@ export function MessageComposer() {
 
 	return (
 		<div className="flex min-w-0 flex-col justify-end">
-			<div className="relative mx-auto flex w-full gap-2 p-4 md:max-w-3xl md:pb-6">
+			<div className="relative mx-auto flex w-full gap-2 p-2 md:max-w-3xl md:pb-6">
 				<div
 					ref={parentRef}
 					tabIndex={-1}

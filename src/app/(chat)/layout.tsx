@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<SidebarProvider>
 			<AgentProvider>
 				<SidebarContent />
-				<main className="relative flex h-dvh w-dvw flex-col overflow-hidden space-y-2 p-2">
+				<main className="relative flex h-dvh w-dvw flex-col overflow-hidden space-y-2 p-2.5">
 					<SidebarTrigger />
 					{children}
 				</main>

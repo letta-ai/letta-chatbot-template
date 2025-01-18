@@ -52,6 +52,9 @@ cd demo-chat-app
 # Install dependencies
 npm install
 
+# Set environment variables
+export $(grep -v '^#' .env.template | xargs)
+
 # Run the app
 npm run dev
 ```

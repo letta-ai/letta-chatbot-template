@@ -1,8 +1,16 @@
 import { LettaClient } from '@letta-ai/letta-client';
 
-const LOCAL_TOKEN = 'your-local-token';
-const BASE_URL = 'http://localhost:8283';
+const LETTA_TOKEN = process.env.LETTA_TOKEN
+const BASE_URL = process.env.BASE_URL
 
-const client = new LettaClient({ token: LOCAL_TOKEN, baseUrl: BASE_URL });
+if (!LETTA_TOKEN) {
+    throw new Error("Environment variable LETTA_TOKEN is not set.");
+}
+
+if (!BASE_URL) {
+    throw new Error("Environment variable BASE_URL is not set.");
+}
+
+const client = new LettaClient({ token: LETTA_TOKEN, baseUrl: BASE_URL });
 
 export default client;

@@ -33,7 +33,15 @@ export function SidebarArea() {
     <Sidebar>
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
-          <div className="flex items-center w-full">
+          <div
+            className="flex items-center w-full"
+            onClick={() => {
+              const divToScroll = document.getElementById('agents-list');
+              if (divToScroll) {
+                divToScroll.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <StatusCircle isLoading={agentId !== null} />
             {window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER'}
           </div>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
 import { useAgentState } from './hooks/use-agent-state';
 
@@ -9,12 +8,12 @@ export function AgentCoreMemoryBlock() {
 
     return (
         <div>
-            {coreMemory.map((block) => (
+            {coreMemory.length > 0 ? coreMemory.map((block) => (
                 <div key={block.id} className='mb-2'>
                     <h3 className='text-sm font-bold mb-1'>{block.label}</h3>
-                    <span className='text-sm'>{block.value}</span>
+                    <span className='text-sm'>{block.value ? block.value : 'No memory available'}</span>
                 </div>
-            ))}
+            )) : <span className='text-sm'>No memory available</span>}
         </div>
     );
 }

@@ -1,14 +1,14 @@
 {
-    "DEFAULT_MEMORY_BLOCKS": [
-        {
-            "label": "human",
-            "value": "The human's name is Bob the Builder"
-        },
-        {
-            "label": "persona",
-            "value": "My name is Sam, the all-knowing sentient AI."
-        }
-    ],
-    "DEFAULT_LLM": "openai/gpt-4o-mini",
-    "DEFAULT_EMBEDDING": "openai/text-embedding-ada-002"
+  "DEFAULT_MEMORY_BLOCKS": [
+    {
+      "label": "human",
+      "value": "The human's name is Bob the Builder"
+    },
+    {
+      "label": "persona",
+      "value": "My name is Sam, the all-knowing sentient AI."
+    }
+  ],
+  "DEFAULT_LLM": "openai/gpt-4o-mini",
+  "DEFAULT_EMBEDDING": "openai/text-embedding-ada-002"
 }

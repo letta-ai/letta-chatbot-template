@@ -5,35 +5,37 @@ import { useAgentMessages } from './hooks/use-agent-messages';
 import { SkeletonLoadBlock } from './ui/skeleton-load-block';
 
 export const AppSidebarMenuButton: React.FC<{ agent: any }> = ({ agent }) => {
-    const { data } = useAgentMessages(agent.id);
-    const isMobile = useIsMobile();
-    const { toggleSidebar } = useSidebar();
-    const { agentId, setAgentId } = useAgentContext();
+  const { data } = useAgentMessages(agent.id);
+  const isMobile = useIsMobile();
+  const { toggleSidebar } = useSidebar();
+  const { agentId, setAgentId } = useAgentContext();
 
-    return (
-        <div className={`border-l-4 ${agent.id === agentId ? 'border-black' : 'border-gray-200'} hover:border-black`}>
-            <SidebarMenuButton
-                asChild
-                isActive={agent.id === agentId}
-                className="overflow-hidden whitespace-nowrap h-full"
-                onClick={() => {
-                    if (isMobile) {
-                        toggleSidebar();
-                    }
-                    setAgentId(agent.id);
-                }}
-            >
-                <div className="overflow-hidden flex-col">
-                    <span className="block w-full truncate">{agent.name}</span>
-                    <span className="block w-full truncate text-muted-foreground">
-                        {data ? (
-                            `${data[data.length - 1].message}`
-                        ) : (
-                            <SkeletonLoadBlock className="w-full h-[1.43em]" />
-                        )}
-                    </span>
-                </div>
-            </SidebarMenuButton>
+  return (
+    <div
+      className={`border-l-4 ${agent.id === agentId ? 'border-black' : 'border-gray-200'} hover:border-black`}
+    >
+      <SidebarMenuButton
+        asChild
+        isActive={agent.id === agentId}
+        className="overflow-hidden whitespace-nowrap h-full"
+        onClick={() => {
+          if (isMobile) {
+            toggleSidebar();
+          }
+          setAgentId(agent.id);
+        }}
+      >
+        <div className="overflow-hidden flex-col">
+          <span className="block w-full truncate">{agent.name}</span>
+          <span className="block w-full truncate text-muted-foreground">
+            {data ? (
+              `${data[data.length - 1].message}`
+            ) : (
+              <SkeletonLoadBlock className="w-full h-[1.43em]" />
+            )}
+          </span>
         </div>
-    );
+      </SidebarMenuButton>
+    </div>
+  );
 };

@@ -4,7 +4,9 @@ const LETTA_TOKEN = process.env.LETTA_TOKEN || 'DEFAULT_TOKEN';
 const BASE_URL = process.env.BASE_URL || 'http://localhost:8283';
 
 if (!LETTA_TOKEN) {
-  console.error('LETTTA_TOKEN is not set. You might not be able to use Letta\'s full functionality.')
+  console.error(
+    "LETTTA_TOKEN is not set. You might not be able to use Letta's full functionality.",
+  );
 }
 
 if (!BASE_URL) {

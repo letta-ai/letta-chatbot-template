@@ -1,6 +1,6 @@
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
-import { useAgentState } from './hooks/use-agent-state';
-import { SkeletonLoadBlock } from './ui/skeleton-load-block';
+import { useAgentState } from '../hooks/use-agent-state';
+import { SkeletonLoadBlock } from '../ui/skeleton-load-block';
 
 export function AgentCoreMemoryBlock() {
   const { agentId } = useAgentContext();

@@ -1,10 +1,10 @@
 'use client';
 
 import { AgentCoreMemoryBlock } from './agent-core-memory-block';
-import { AgentArchivalMemory } from './agent-details/agent-archival-memory';
-import { useAgentDetails } from './ui/agent-details';
-import { useIsMobile } from './hooks/use-mobile';
-import { LeftBar } from './ui/left-bar';
+import { AgentArchivalMemory } from './agent-archival-memory';
+import { useAgentDetails } from '../ui/agent-details';
+import { useIsMobile } from '../hooks/use-mobile';
+import { LeftBar } from '../ui/left-bar';
 
 export function AgentDetailDisplay() {
   const { isOpen } = useAgentDetails();

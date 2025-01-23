@@ -2,8 +2,7 @@
 
 import { Messages } from '@/components/messages';
 import { MessageComposer } from '@/components/message-composer';
-import { ChatHeader } from '@/components/chat-header';
-import { AgentDetailsProvider, useAgentDetails } from '@/components/ui/agent-details';
+import { useAgentDetails } from '@/components/ui/agent-details';
 import { AgentDetailDisplay } from '@/components/agent-details-display';
 import { useIsMobile } from '@/components/hooks/use-mobile';
 

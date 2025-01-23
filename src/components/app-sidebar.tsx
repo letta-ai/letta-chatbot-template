@@ -5,9 +5,11 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    useSidebar,
 } from '@/components/ui/sidebar';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
 import { useAgents } from '@/components/hooks/use-agents';
+import { useIsMobile } from './hooks/use-mobile';
 import { useEffect, useRef, useState } from 'react';
 
 export function AppSidebar() {
@@ -16,6 +18,9 @@ export function AppSidebar() {
 
 function AppSidebarContent() {
     const { agentId, setAgentId } = useAgentContext();
+    const isMobile = useIsMobile();
+    const { toggleSidebar } = useSidebar();
+
     const { data } = useAgents();
     const ref = useRef(false);
 
@@ -40,6 +45,9 @@ function AppSidebarContent() {
                                         isActive={agent.id === agentId}
                                         className="overflow-hidden whitespace-nowrap"
                                         onClick={() => {
+                                            if (isMobile) {
+                                                toggleSidebar();
+                                            }
                                             setAgentId(agent.id);
                                         }}
                                     >

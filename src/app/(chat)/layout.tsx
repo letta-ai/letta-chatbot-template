@@ -6,7 +6,6 @@ import { ChatHeader } from '@/components/chat-header';
 import { AgentDetailsProvider } from '@/components/ui/agent-details';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-
 	return (
 		<SidebarProvider>
 			<AgentProvider>

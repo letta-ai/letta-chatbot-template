@@ -1,6 +1,8 @@
 import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
-import client from '../../../../config/letta-client';
+import client from '@/config/letta-client';
+import defaultAgent from '@/default-agent'
+
 
 async function getAgents(req: NextApiRequest) {
     try {
@@ -18,18 +20,10 @@ async function getAgents(req: NextApiRequest) {
 }
 
 async function createAgent(req: NextApiRequest) {
-    const DEFAULT_MEMORY_BLOCKS = [
-        {
-            label: 'human',
-            value: "The human'''s name is Bob the Builder",
-        },
-        {
-            label: 'persona',
-            value: 'My name is Sam, the all-knowing sentient AI.',
-        },
-    ];
-    const DEFAULT_LLM = 'openai/gpt-4o-mini';
-    const DEFAULT_EMBEDDING = 'openai/text-embedding-ada-002';
+    // ADD YOUR OWN AGENTS HERE
+    const DEFAULT_MEMORY_BLOCKS = defaultAgent.DEFAULT_MEMORY_BLOCKS;
+    const DEFAULT_LLM = defaultAgent.DEFAULT_LLM;
+    const DEFAULT_EMBEDDING = defaultAgent.DEFAULT_EMBEDDING;
 
     try {
         const newAgent = await client.agents.create({

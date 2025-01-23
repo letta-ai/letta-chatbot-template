@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { MessagePill } from '@/components/ui/message';
-import { useAgentContext } from '../app/(chat)/context/agent-context';
-import { useAgentMessages } from './hooks/use-agent-messages';
+import { useAgentContext } from '../../app/(chat)/context/agent-context';
+import { useAgentMessages } from '../hooks/use-agent-messages';
 import { Ellipsis, LoaderCircle } from 'lucide-react';
-import { MessagePopover } from './message-area/message-popover';
+import { MessagePopover } from './message-popover';
 
 export const Messages: React.FC = () => {
   const { agentId } = useAgentContext();

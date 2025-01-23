@@ -13,7 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
 import { ArrowUpIcon } from 'lucide-react';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
-import { useSendMessage } from './hooks/use-send-message';
+import { useSendMessage } from '../hooks/use-send-message';
 
 export function MessageComposer() {
   const { agentId } = useAgentContext();

@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAgentContext } from './context/agent-context';
-import { SidebarContent } from '@/components/sidebar-content';
+import { SidebarArea } from '@/components/sidebar-area/sidebar-area';
 import { ChatHeader } from '@/components/chat-header';
 import { useRef } from 'react';
 import { useEffect } from 'react';
@@ -22,10 +22,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <SidebarContent />
+      <SidebarArea />
       <main className="relative flex h-dvh w-dvw flex-col overflow-hidden">
         <div className="flex border-b border-border p-2.5 gap-3">
-          <SidebarTrigger />
           <ChatHeader />
         </div>
         {children}

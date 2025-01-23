@@ -10,7 +10,6 @@ export function AgentDetailDisplay() {
   const { isOpen } = useAgentDetails();
   const isMobile = useIsMobile();
 
-  // TODO: FIX TRANSITION
   return (
     <div
       className={`bg-secondary transition-transform transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full w-0'} ${isMobile && isOpen ? 'flex-1' : ''}`}

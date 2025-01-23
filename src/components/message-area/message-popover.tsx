@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardDescription, CardHeader } from './ui/card';
+import { Card, CardDescription, CardHeader } from '../ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useSendMessage } from './hooks/use-send-message';
+import { useSendMessage } from '../hooks/use-send-message';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
 
 export const MessagePopover: React.FC = () => {

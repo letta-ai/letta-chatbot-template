@@ -4,10 +4,9 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAgentContext } from './context/agent-context';
 import { SidebarContent } from '@/components/sidebar-content';
 import { ChatHeader } from '@/components/chat-header';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useAgents } from '@/components/hooks/use-agents';
-import { useAgentState } from '@/components/hooks/use-agent-state';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const { data } = useAgents();

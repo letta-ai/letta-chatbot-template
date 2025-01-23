@@ -6,12 +6,6 @@ import { useAgentDetails } from './ui/agent-details';
 import { AgentArchivalMemory } from './agent-archival-memory';
 
 export function AgentDetailDisplay() {
-    const { isOpen } = useAgentDetails();
-
-    if (!isOpen) {
-        return null;
-    }
-
     return (
         // TODO: ADD TRANSITION
         <div className='pt-2 px-6'>

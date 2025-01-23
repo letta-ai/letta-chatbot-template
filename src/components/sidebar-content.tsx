@@ -7,6 +7,7 @@ import { useCreateAgent } from './hooks/use-create-agent';
 import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY } from './hooks/use-agents';
 import { AgentState } from '@letta-ai/letta-client/api';
+import { StatusCircle } from './ui/status-circle';
 
 export function SidebarContent() {
 	const { agentId, setAgentId } = useAgentContext();
@@ -33,7 +34,7 @@ export function SidebarContent() {
 			<div className="flex flex-row items-center justify-between">
 				<div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
 					<div className="flex items-center w-full">
-						<div className={`w-2 h-2 rounded-full ${agentId ? 'bg-green-500' : 'bg-yellow-500'} mr-2`} />
+						<StatusCircle isLoading={agentId !== null} />
 						{window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER'}
 					</div>
 				</div>

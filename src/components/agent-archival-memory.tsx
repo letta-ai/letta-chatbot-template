@@ -12,7 +12,7 @@ export function AgentArchivalMemory() {
                 <div key={block.id} className='mb-2'>
                     <span className='text-sm'>{block.text}</span>
                 </div>
-            )) : <span className='text-sm'>No memory available</span>}
+            )) : <span className='text-sm text-muted-foreground'>No memory available</span>}
         </div>
     );
 }

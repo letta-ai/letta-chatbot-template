@@ -13,7 +13,7 @@ export function AgentCoreMemoryBlock() {
                     <h3 className='text-sm font-bold mb-1'>{block.label}</h3>
                     <span className='text-sm'>{block.value ? block.value : 'No memory available'}</span>
                 </div>
-            )) : <span className='text-sm'>No memory available</span>}
+            )) : <span className='text-sm text-muted-foreground'>No memory available</span>}
         </div>
     );
 }

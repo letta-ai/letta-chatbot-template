@@ -14,6 +14,7 @@ export function SidebarContent() {
 	const queryClient = useQueryClient();
 	const { mutate: createAgent, isPending } = useCreateAgent();
 
+
 	const handleCreateAgent = () => {
 		if (isPending) return;
 		createAgent(undefined, {
@@ -32,7 +33,9 @@ export function SidebarContent() {
 	return (
 		<Sidebar>
 			<div className="flex flex-row items-center justify-between">
-				<Header title="Chatbot" />
+				<div className='text-l font-bold relative flex w-full min-w-0 cursor-default flex-col p-2.5 pl-4'>
+					Chatbot
+				</div>
 				<div className="flex justify-end p-2">
 					<Button
 						disabled={isPending}

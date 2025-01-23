@@ -6,43 +6,50 @@ import client from '@/config/letta-client';
 // TODO: fix typing below once SDK is fixed
 function filterMessages(data: AppMessage[]): AppMessage[] {
     return data
-        .filter((item) => {
+        .filter(item => {
             if (item.messageType === MessageType.USER_MESSAGE) {
-                try {
-                    const parsedMessage = JSON.parse(item.message || '{}');
-                    return !!parsedMessage.message;
-                } catch {
-                    return false;
-                }
+                return isValidUserMessage(item.message);
             }
             return item.messageType === MessageType.TOOL_CALL_MESSAGE;
         })
-        .map(({ messageType, id, message, date, toolCall }) => {
-            let extractedMessage = '';
-            if (messageType === MessageType.USER_MESSAGE && message) {
-                try {
-                    const parsedMessage = JSON.parse(message);
-                    extractedMessage = parsedMessage.message || '';
-                } catch (error) {
-                    console.error(`Failed to parse user_message for id ${id}:`, error);
-                }
-            }
-            if (messageType === MessageType.TOOL_CALL_MESSAGE && toolCall) {
-                try {
-                    const parsedArguments = JSON.parse(toolCall.arguments);
-                    extractedMessage = parsedArguments.message || '';
-                } catch (error) {
-                    console.error(`Failed to parse toolCall arguments for id ${id}:`, error);
-                }
-            }
-            return {
-                messageType,
-                id,
-                date,
-                message: extractedMessage,
-            };
-        })
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date in ascending order
+        .map(item => extractMessage(item))
+        .filter(item => item !== null)
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+}
+
+function isValidUserMessage(message: string | undefined): boolean {
+    if (!message) return false;
+    try {
+        const parsedMessage = JSON.parse(message);
+        return !!parsedMessage.message;
+    } catch {
+        return false;
+    }
+}
+
+function extractMessage(item: AppMessage): AppMessage | null {
+    const { messageType, id, message, date, toolCall } = item;
+    let extractedMessage = '';
+
+    if (messageType === MessageType.USER_MESSAGE && message) {
+        extractedMessage = parseMessage(message, id, 'user_message');
+    } else if (messageType === MessageType.TOOL_CALL_MESSAGE && toolCall) {
+        extractedMessage = parseMessage(toolCall.arguments, id, 'toolCall arguments');
+    }
+
+    if (!extractedMessage) return null;
+
+    return { messageType, id, date, message: extractedMessage };
+}
+
+function parseMessage(content: string, id: string, context: string): string {
+    try {
+        const parsedContent = JSON.parse(content);
+        return parsedContent.message || '';
+    } catch (error) {
+        console.error(`Failed to parse ${context} for id ${id}:`, error);
+        return '';
+    }
 }
 
 async function getAgentMessages(
@@ -54,7 +61,6 @@ async function getAgentMessages(
         const messages = await client.agents.messages.list(agentId, {
             limit: 100,
         });
-
         const result = filterMessages(messages);
         return NextResponse.json(result);
     } catch (error) {
@@ -70,15 +76,12 @@ async function sendMessage(
     const { role, text } = await req.json();
     const { agentId } = await params;
 
-
-
-    // set up evenstream
+    // set up eventstream
     const encoder = new TextEncoder();
 
     const response = new NextResponse(
         new ReadableStream({
             async start(controller) {
-
                 const response = await client.agents.messages.create(agentId, {
                     messages: [
                         {
@@ -87,15 +90,12 @@ async function sendMessage(
                         },
                     ],
                 });
-
                 const messageToSend = filterMessages(response.messages)?.[0];
-
                 controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify(messageToSend)}\n\n`),
+                    encoder.encode(`data: ${JSON.stringify(messageToSend)}\n\n`),
                 );
 
                 controller.close();
-
                 // Close connection on request close
                 req.signal.addEventListener('abort', () => {
                     controller.close();

@@ -12,7 +12,7 @@ export default function Home() {
 	const isMobile = useIsMobile();
 
 	return (
-		<div className="flex h-full flex-row flex-1 h-0">
+		<div className="flex flex-row flex-1 h-0">
 			{(!isMobile) || (isMobile && !isOpen) ? (
 				<div className="relative flex flex-col flex-1 h-full min-w-0 gap-5 overflow-hidden bg-background pt-4">
 					<div className="flex-1 overflow-auto">

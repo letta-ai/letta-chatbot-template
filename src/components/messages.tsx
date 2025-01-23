@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { MessagePill } from '@/components/ui/message';
 import { useAgentContext } from '../app/(chat)/context/agent-context';
 import { useAgentMessages } from './hooks/use-agent-messages';
-import { Ellipsis } from 'lucide-react';
+import { Ellipsis, LoaderCircle } from 'lucide-react';
 import { MessagePopover } from './message-popover';
 
 export const Messages: React.FC = () => {
@@ -34,8 +34,9 @@ export const Messages: React.FC = () => {
 								/>
 							);
 						})
-					: // TODO: ADD LOADING STATE
-					''}
+					: <div className="flex justify-center items-center h-full">
+						<LoaderCircle className="animate-spin" size={32} />
+					</div>}
 				<div ref={messagesEndRef} />
 			</div>
 		</div>

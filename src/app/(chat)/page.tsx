@@ -21,11 +21,7 @@ export default function Home() {
 					<MessageComposer />
 				</div>
 			) : null}
-			{isOpen && (
-				<div className="bg-secondary flex-1">
-					<AgentDetailDisplay />
-				</div>
-			)}
+			<AgentDetailDisplay />
 		</div>
 	);
 }

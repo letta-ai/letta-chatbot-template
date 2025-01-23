@@ -1,11 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
 import { AgentCoreMemoryBlock } from './agent-core-memory-block';
-import { useAgentDetails } from './ui/agent-details';
 import { AgentArchivalMemory } from './agent-archival-memory';
+import { useAgentDetails } from './ui/agent-details';
+import { useIsMobile } from './hooks/use-mobile';
 
 export function AgentDetailDisplay() {
+    const { isOpen } = useAgentDetails();
+    const isMobile = useIsMobile();
+
+    // TODO: FIX TRANSITION
+    return (
+        <div className={`bg-secondary transition-transform transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full w-0'} ${isMobile && isOpen ? 'flex-1' : ''}`}>
+            <AgentDetailDisplayContent />
+        </div>
+    );
+}
+
+function AgentDetailDisplayContent() {
     return (
         // TODO: ADD TRANSITION
         <div className='pt-2 px-6'>
@@ -24,4 +36,3 @@ export function AgentDetailDisplay() {
         </div>
     );
 }
-

@@ -4,17 +4,8 @@ import { useAgentArchivalMemory } from './hooks/use-agent-archival-memory';
 
 export function AgentArchivalMemory() {
     const { agentId } = useAgentContext();
-    const { data, error: queryError } = useAgentArchivalMemory(agentId);
+    const { data } = useAgentArchivalMemory(agentId);
     const archivalMemory = data || [];
-    const [error, setError] = useState<string>('');
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    if (!archivalMemory) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div>

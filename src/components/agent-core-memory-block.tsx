@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
 import { useAgentState } from './hooks/use-agent-state';
-import { Letta } from '@letta-ai/letta-client';
 
 export function AgentCoreMemoryBlock() {
     const { agentId } = useAgentContext();
     const { data } = useAgentState(agentId);
-    const [error, setError] = useState<string>('');
     const coreMemory = data?.memory.blocks || [];
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    if (!coreMemory) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div>

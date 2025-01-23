@@ -13,6 +13,7 @@ export function AgentDetailDisplay() {
     }
 
     return (
+        // TODO: ADD TRANSITION
         <div className='pt-2 px-6'>
             {[
                 { title: 'CORE MEMORY', component: <AgentCoreMemoryBlock /> },
@@ -26,7 +27,6 @@ export function AgentDetailDisplay() {
                     </div>
                 </section>
             ))}
-
         </div>
     );
 }

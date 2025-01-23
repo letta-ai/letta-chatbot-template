@@ -40,7 +40,7 @@ export const Messages: React.FC = () => {
 						</div>
 					)
 				) : (
-					<div className="flex justify-center items-center h-full">
+					<div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
 						<LoaderCircle className="animate-spin" size={32} />
 					</div>
 				)}

@@ -25,7 +25,11 @@ export const AppSidebarMenuButton: React.FC<{ agent: any }> = ({ agent }) => {
                 <div className="overflow-hidden flex-col">
                     <span className="block w-full truncate">{agent.name}</span>
                     <span className="block w-full truncate text-muted-foreground">
-                        {data ? `${data[data.length - 1].message}` : 'Loading...'}
+                        {data ? (
+                            `${data[data.length - 1].message}`
+                        ) : (
+                            <div className="w-full h-5 bg-gray-100 rounded"></div>
+                        )}
                     </span>
                 </div>
             </SidebarMenuButton>

@@ -5,6 +5,7 @@ import Providers from './providers';
 import { AgentProvider } from './[agentId]/context/agent-context';
 import { AgentDetailsProvider } from '@/components/ui/agent-details';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import ContentLayout from './content-layout';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <SidebarProvider>
-            <AgentProvider>
-              <AgentDetailsProvider>{children}</AgentDetailsProvider>
-            </AgentProvider>
+            <AgentDetailsProvider>
+              <ContentLayout>
+                {children}
+              </ContentLayout>
+            </AgentDetailsProvider>
           </SidebarProvider>
         </Providers>
       </body>

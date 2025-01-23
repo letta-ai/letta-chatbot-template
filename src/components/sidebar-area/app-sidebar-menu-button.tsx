@@ -23,7 +23,7 @@ export const AppSidebarMenuButton: React.FC<{ agent: any }> = ({ agent }) => {
             toggleSidebar();
           }
           setAgentId(agent.id);
-          window.history.pushState(null, '', `/${agent.id}`);
+          // window.history.pushState(null, '', `/${agent.id}`);
         }}
       >
         <div className="overflow-hidden flex-col">

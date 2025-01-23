@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle, PlusIcon } from 'lucide-react';
 import { AppSidebar } from '@/components/sidebar-area/app-sidebar';
 import { Sidebar } from '../ui/sidebar';
-import { useAgentContext } from '@/app/(chat)/context/agent-context';
+import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useCreateAgent } from '../hooks/use-create-agent';
 import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY } from '../hooks/use-agents';

@@ -11,7 +11,7 @@ import { AppSidebarMenuButton } from './app-sidebar-menu-button';
 export function AppSidebar() {
   const { data } = useAgents();
   return (
-    <SidebarContent id="agents-list">
+    <SidebarContent id='agents-list'>
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu className="cursor-pointer">

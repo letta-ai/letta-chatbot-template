@@ -1,14 +1,17 @@
 'use client';
 
-import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAgentContext } from './context/agent-context';
 import { SidebarArea } from '@/components/sidebar-area/sidebar-area';
 import { ChatHeader } from '@/components/chat-header';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useAgents } from '@/components/hooks/use-agents';
+import { useParams } from 'next/navigation';
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const params = useParams();
+  const { agentId: agentIdFromParams } = params;
   const { data } = useAgents();
   const { setAgentId } = useAgentContext();
   const ref = useRef(false);
@@ -18,7 +21,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       setAgentId(data[0].id);
       ref.current = true;
     }
-  }, [data, setAgentId]);
+    if (agentIdFromParams) {
+      setAgentId(agentIdFromParams as string);
+    }
+  }, [data, setAgentId, agentIdFromParams]);
 
   return (
     <>

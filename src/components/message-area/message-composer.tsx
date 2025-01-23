@@ -12,7 +12,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
 import { ArrowUpIcon } from 'lucide-react';
-import { useAgentContext } from '@/app/(chat)/context/agent-context';
+import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useSendMessage } from '../hooks/use-send-message';
 
 export function MessageComposer() {

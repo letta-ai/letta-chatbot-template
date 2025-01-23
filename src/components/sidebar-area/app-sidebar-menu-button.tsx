@@ -1,5 +1,5 @@
 import { SidebarMenuButton, useSidebar, SidebarMenuItem } from '@/components/ui/sidebar';
-import { useAgentContext } from '@/app/(chat)/context/agent-context';
+import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useIsMobile } from '@/components/hooks/use-mobile';
 import { useAgentMessages } from '../hooks/use-agent-messages';
 import { SkeletonLoadBlock } from '../ui/skeleton-load-block';
@@ -23,6 +23,7 @@ export const AppSidebarMenuButton: React.FC<{ agent: any }> = ({ agent }) => {
             toggleSidebar();
           }
           setAgentId(agent.id);
+          window.history.pushState(null, '', `/${agent.id}`);
         }}
       >
         <div className="overflow-hidden flex-col">

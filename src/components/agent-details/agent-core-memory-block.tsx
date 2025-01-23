@@ -1,4 +1,4 @@
-import { useAgentContext } from '@/app/(chat)/context/agent-context';
+import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useAgentState } from '../hooks/use-agent-state';
 import { SkeletonLoadBlock } from '../ui/skeleton-load-block';
 

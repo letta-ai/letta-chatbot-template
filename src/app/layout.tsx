@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
-import { AgentProvider } from './(chat)/context/agent-context';
+import { AgentProvider } from './[agentId]/context/agent-context';
 import { AgentDetailsProvider } from '@/components/ui/agent-details';
 import { SidebarProvider } from '@/components/ui/sidebar';
 

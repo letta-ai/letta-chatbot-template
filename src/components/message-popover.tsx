@@ -44,7 +44,7 @@ export const MessagePopover: React.FC = () => {
                         () => {
                             sendMessage({ agentId: agentId, text: card.action });
                         }
-                    } className="cursor-pointer shadow-none">
+                    } className="cursor-pointer shadow-none hover:bg-accent transition-shadow duration-300">
                         <CardHeader>
                             <p className="text-sm font-medium leading-none !font-bold">
                                 {card.title}

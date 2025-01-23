@@ -22,15 +22,6 @@ function AppSidebarContent() {
     const { toggleSidebar } = useSidebar();
 
     const { data } = useAgents();
-    const ref = useRef(false);
-
-
-    useEffect(() => {
-        if (data && data.length > 0 && !ref.current) {
-            setAgentId(data[0].id);
-            ref.current = true;
-        }
-    }, [data, setAgentId]);
 
     return (
         <SidebarContent>

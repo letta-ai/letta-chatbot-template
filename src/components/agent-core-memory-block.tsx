@@ -4,7 +4,11 @@ import { useAgentState } from './hooks/use-agent-state';
 export function AgentCoreMemoryBlock() {
     const { agentId } = useAgentContext();
     const { data } = useAgentState(agentId);
-    const coreMemory = data?.memory.blocks || [];
+    const coreMemory = data?.memory?.blocks || [];
+
+    if (!coreMemory) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>

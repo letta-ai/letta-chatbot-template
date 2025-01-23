@@ -6,8 +6,10 @@ import { Sidebar } from './ui/sidebar';
 import { useAgentContext } from '@/app/(chat)/context/agent-context';
 import { useCreateAgent } from './hooks/use-create-agent';
 import { useQueryClient } from '@tanstack/react-query';
-import { USE_AGENTS_KEY } from './hooks/use-agents';
+import { USE_AGENTS_KEY, useAgents } from './hooks/use-agents';
 import { AgentState } from '@letta-ai/letta-client/api';
+import { useEffect } from 'react';
+import { useAgentMessages } from './hooks/use-agent-messages';
 
 export function SidebarContent() {
 	const { setAgentId } = useAgentContext();

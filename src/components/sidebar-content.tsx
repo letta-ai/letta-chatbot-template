@@ -33,7 +33,7 @@ export function SidebarContent() {
 			<div className="flex flex-row items-center justify-between">
 				<div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
 					<div className="flex items-center w-full">
-						<div className={`w-2 h-2 rounded-full ${agentId ? 'bg-green-500' : 'bg-orange-500'} mr-2`} />
+						<div className={`w-2 h-2 rounded-full ${agentId ? 'bg-green-500' : 'bg-yellow-500'} mr-2`} />
 						{window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER'}
 					</div>
 				</div>

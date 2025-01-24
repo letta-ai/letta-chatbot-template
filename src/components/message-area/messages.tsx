@@ -4,6 +4,7 @@ import { useAgentContext } from '../../app/[agentId]/context/agent-context';
 import { useAgentMessages } from '../hooks/use-agent-messages';
 import { Ellipsis, LoaderCircle } from 'lucide-react';
 import { MessagePopover } from './message-popover';
+import { DEFAULT_BOT_MESSAGE } from '@/app/lib/labels';
 
 export const Messages: React.FC = () => {
   const { agentId } = useAgentContext();
@@ -21,7 +22,7 @@ export const Messages: React.FC = () => {
       <div className="flex h-full">
         {data ? (
           data.length === 1 &&
-            data[0].message === 'More human than human is our motto.' ? (
+            data[0].message === DEFAULT_BOT_MESSAGE ? (
             <MessagePopover key={data[0].id} />
           ) : (
             <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">

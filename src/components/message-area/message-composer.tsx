@@ -14,6 +14,7 @@ import { useRef } from 'react';
 import { ArrowUpIcon } from 'lucide-react';
 import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useSendMessage } from '../hooks/use-send-message';
+import { TEXTBOX_PLACEHOLDER } from '@/app/lib/labels';
 
 export function MessageComposer() {
   const { agentId } = useAgentContext();
@@ -50,7 +51,7 @@ export function MessageComposer() {
                     <FormControl>
                       <Textarea
                         className="!focus-visible:outline-none !focus-visible:ring-0 flex w-full resize-none overflow-hidden border-none bg-transparent text-base shadow-none ring-0 placeholder:text-muted-foreground hover:border-none focus:border-none focus:ring-0 md:text-sm"
-                        placeholder="Send a message..."
+                        placeholder={TEXTBOX_PLACEHOLDER}
                         {...field}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' && !e.shiftKey) {

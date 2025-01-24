@@ -25,7 +25,6 @@ export function SidebarArea() {
           },
         );
         setAgentId(data.id);
-        // window.history.pushState(null, '', `/${data.id}`);
       },
     });
   };

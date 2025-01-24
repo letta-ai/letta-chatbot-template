@@ -6,14 +6,17 @@ import { Ellipsis, LoaderCircle } from 'lucide-react';
 import { MessagePopover } from './message-popover';
 import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
 import { useIsConnected } from '../hooks/use-is-connected';
+import { useAgents } from '../hooks/use-agents';
 
 export const Messages: React.FC = () => {
   const { agentId } = useAgentContext();
   const { data, isLoading } = useAgentMessages(agentId);
+  const { data: agents, isLoading: agentsLoading } = useAgents()
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isConnected = useIsConnected()
 
-  console.log(data, isConnected, '---')
+  console.log(data, isConnected, '---', typeof data, agents, typeof agents, !!agents, agents?.length)
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -46,10 +49,8 @@ export const Messages: React.FC = () => {
           )
         ) : (
           <div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
-            {isLoading ? (
+            {isLoading || (isConnected && agents && agents.length === 0) ? (
               <LoaderCircle className="animate-spin" size={32} />
-            ) : isConnected && data === undefined ? (
-              'ay yo'
             ) : (
               ERROR_CONNECTING
             )}

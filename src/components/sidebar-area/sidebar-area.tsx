@@ -9,6 +9,7 @@ import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents';
 import { AgentState } from '@letta-ai/letta-client/api';
 import { StatusCircle } from '../ui/status-circle';
 import { useIsConnected } from '../hooks/use-is-connected';
+import { handleCreateAgent } from '../helpers';
 
 export function SidebarArea() {
   const { agentId, setAgentId } = useAgentContext();
@@ -17,22 +18,16 @@ export function SidebarArea() {
   const { data, isLoading } = useAgents();
   const isConnected = useIsConnected()
 
-  const handleCreateAgent = () => {
-    if (isPending) return;
-    createAgent(undefined, {
-      onSuccess: (data) => {
-        queryClient.setQueriesData(
-          { queryKey: USE_AGENTS_KEY },
-          (oldData: AgentState[]) => {
-            return [data, ...oldData];
-          },
-        );
-        setAgentId(data.id);
-      },
-    });
+  const scrollSidebarToTop = () => {
+    const divToScroll = document.getElementById('agents-list');
+    if (divToScroll) {
+      divToScroll.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
-  console.log(data, '->', isLoading);
+  const scrollSidebarToCurrentAgent = () => {
+    document.getElementById(agentId)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <Sidebar>
@@ -41,10 +36,7 @@ export function SidebarArea() {
           <div
             className="flex items-center w-full"
             onClick={() => {
-              const divToScroll = document.getElementById('agents-list');
-              if (divToScroll) {
-                divToScroll.scrollTo({ top: 0, behavior: 'smooth' });
-              }
+              scrollSidebarToCurrentAgent()
             }}
           >
             <StatusCircle isConnected={isConnected} isLoading={isLoading} />
@@ -55,7 +47,10 @@ export function SidebarArea() {
           <Button
             disabled={isPending}
             type="button"
-            onClick={handleCreateAgent}
+            onClick={() => {
+              handleCreateAgent(isPending, createAgent, setAgentId, queryClient)
+              scrollSidebarToTop()
+            }}
             className="inline-flex size-3 h-fit items-center justify-center whitespace-nowrap bg-transparent font-medium text-primary shadow-none ring-offset-background transition-colors hover:hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           >
             {isPending ? (

@@ -17,6 +17,7 @@ export const AppSidebarMenuButton: React.FC<{ agent: AgentState }> = ({ agent })
       className={`border-l-4 ${agent.id === agentId ? 'border-black' : 'border-gray-200'} hover:border-black`}
     >
       <SidebarMenuButton
+        id={agent.id}
         asChild
         isActive={agent.id === agentId}
         className="overflow-hidden whitespace-nowrap h-full"

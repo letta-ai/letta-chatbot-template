@@ -1,10 +1,7 @@
 import { AgentState } from "@letta-ai/letta-client/api";
 import { USE_AGENTS_KEY } from "./hooks/use-agents";
-import { useQueryClient } from "@tanstack/react-query";
 
-export const handleCreateAgent = (isPending, createAgent, setAgentId) => {
-    const queryClient = useQueryClient();
-
+export const handleCreateAgent = (isPending, createAgent, setAgentId, queryClient) => {
     if (isPending) return;
     createAgent(undefined, {
         onSuccess: (data) => {

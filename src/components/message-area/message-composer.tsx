@@ -13,12 +13,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
 import { ArrowUpIcon } from 'lucide-react';
 import { useAgentContext } from '@/app/[agentId]/context/agent-context';
-import { useSendMessage } from '../hooks/use-send-message';
+import { UseSendMessageType } from '../hooks/use-send-message';
 import { TEXTBOX_PLACEHOLDER } from '@/app/lib/labels';
 
-export function MessageComposer() {
+interface MessageComposerProps {
+  sendMessage: (options: UseSendMessageType) => void;
+  isSendingMessage: boolean;
+}
+
+export function MessageComposer(props: MessageComposerProps) {
   const { agentId } = useAgentContext();
-  const { mutate: sendMessage, isPending } = useSendMessage();
+  const { sendMessage, isSendingMessage } = props;
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +31,7 @@ export function MessageComposer() {
     defaultValues: { message: '' },
   });
   async function onSubmit(data: { message: string }) {
-    if (isPending) {
+    if (isSendingMessage) {
       return;
     }
     form.reset();
@@ -69,7 +74,7 @@ export function MessageComposer() {
                 <Button
                   type="submit"
                   className="flex h-8 w-1 items-center justify-center rounded-full"
-                  disabled={isPending}
+                  disabled={isSendingMessage}
                 >
                   <ArrowUpIcon width={14} height={16} />
                 </Button>

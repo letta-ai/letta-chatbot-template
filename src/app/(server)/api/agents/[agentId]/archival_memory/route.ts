@@ -11,7 +11,8 @@ async function getAgentArchivalMemory(
     return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 });
   }
   try {
-    const archivalMemory = await client.agents.archivalMemory.list(agentId);
+    const archivalMemory = await client.agents.listArchivalMemory(agentId);
+
     if (!archivalMemory) {
       return NextResponse.json({ error: 'Archival memory not found' }, { status: 404 });
     }

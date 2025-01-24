@@ -27,9 +27,10 @@ async function createAgent(req: NextApiRequest) {
   try {
     const newAgent = await client.agents.create({
       memoryBlocks: DEFAULT_MEMORY_BLOCKS,
-      llm: DEFAULT_LLM,
+      model: DEFAULT_LLM,
       embedding: DEFAULT_EMBEDDING,
     });
+
     return NextResponse.json(newAgent);
   } catch (error) {
     console.error('Error creating agent:', error);

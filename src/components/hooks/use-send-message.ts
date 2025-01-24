@@ -1,12 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { getAgentMessagesQueryKey } from './use-agent-messages';
-import { AppMessage, MessageType } from '../../types';
+import { AppMessage } from '../../types';
+import * as Letta from '@letta-ai/letta-client/api';
+
+export interface UseSendMessageType {
+    agentId: string,
+    text: string
+}
 
 export function useSendMessage() {
     const queryClient = useQueryClient();
 
-    async function sendMessage(agentId: string, text: string) {
+    async function sendMessage(options: UseSendMessageType) {
+        const { agentId, text } = options;
         const url = `/api/agents/${agentId}/messages`;
         try {
             queryClient.setQueriesData<AppMessage[]>(
@@ -24,13 +31,7 @@ export function useSendMessage() {
                             id: 'new_' + Date.now(),
                             date: Date.now(),
                             message: text,
-                            messageType: MessageType.USER_MESSAGE,
-                        },
-                        {
-                            id: 'deleteme_',
-                            date: Date.now(),
-                            message: 'Typing...',
-                            messageType: MessageType.TOOL_CALL_MESSAGE,
+                            messageType: 'user_message',
                         },
                     ];
                 },
@@ -43,8 +44,8 @@ export function useSendMessage() {
                 },
                 body: JSON.stringify({ role: 'user', text }),
                 onmessage: (message) => {
-                    const response = JSON.parse(message.data) as AppMessage;
-                    queryClient.setQueriesData<AppMessage[]>(
+                    const response = JSON.parse(message.data) as Letta.agents.LettaStreamingResponse;
+                    queryClient.setQueriesData<AppMessage[] | undefined>(
                         {
                             queryKey: getAgentMessagesQueryKey(agentId),
                         },
@@ -52,21 +53,36 @@ export function useSendMessage() {
                             if (!_data) {
                                 return _data;
                             }
+
                             const data = _data.filter((message) => message.id !== 'deleteme_');
 
-                            const existingMessage = data.find((message) => message.id === response.id);
+                            const existingMessage = data.find((message) => message.id === response?.id);
+
+                            if (response.messageType !== 'assistant_message') {
+                                return data;
+                            }
+
                             if (existingMessage) {
                                 return data.map((message) => {
                                     if (message.id === response.id) {
                                         return {
-                                            ...message,
-                                            ...response,
+                                            id: response.id,
+                                            date: new Date(response.date).getTime(),
+                                            messageType: response.messageType,
+                                            message: `${existingMessage.message || ''}${response.assistantMessage || ''}`,
                                         };
                                     }
+
                                     return message;
                                 });
                             }
-                            return [...data, response];
+
+                            return [...data, {
+                                id: response.id,
+                                date: new Date(response.date).getTime(),
+                                messageType: response.messageType,
+                                message: response.assistantMessage || '',
+                            }];
                         },
                     );
                 },
@@ -75,8 +91,7 @@ export function useSendMessage() {
             console.error('Error sending message:', error);
         }
     }
-    return useMutation({
-        mutationFn: ({ agentId, text }: { agentId: string; text: string }) =>
-            sendMessage(agentId, text),
+    return useMutation<void, undefined, UseSendMessageType>({
+        mutationFn: (options) => sendMessage(options),
     });
 }

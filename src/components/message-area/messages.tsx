@@ -8,55 +8,86 @@ import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
 import { useIsConnected } from '../hooks/use-is-connected';
 import { useAgents } from '../hooks/use-agents';
 
-export const Messages: React.FC = () => {
-  const { agentId } = useAgentContext();
-  const { data, isLoading } = useAgentMessages(agentId);
-  const { data: agents, isLoading: agentsLoading } = useAgents()
+interface MessagesProps {
+  isSendingMessage: boolean;
+}
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+export const Messages = (props: MessagesProps) => {
+  const { isSendingMessage } = props;
+  const { agentId } = useAgentContext();
+  const { data: messages, isLoading } = useAgentMessages(agentId);
+  const { data: agents } = useAgents()
+
+  const messagesListRef = useRef<HTMLDivElement>(null);
   const isConnected = useIsConnected()
 
-  console.log(data, isConnected, '---', typeof data, agents, typeof agents, !!agents, agents?.length)
+  const mounted = useRef(false);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (!messages) {
+      return;
     }
-  }, [data]);
+
+    // scroll to the bottom on first render
+    if (messagesListRef.current && !mounted.current) {
+      messagesListRef.current.scrollTo(0, messagesListRef.current.scrollHeight);
+      mounted.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messagesListRef.current) {
+      // only scroll to the bottom is user is 100px away from the bottom
+      const boundary = 100;
+      const bottom = messagesListRef.current.scrollHeight - messagesListRef.current.clientHeight - boundary;
+
+      if (messagesListRef.current.scrollTop >= bottom || isSendingMessage) {
+        messagesListRef.current.scrollTo(0, messagesListRef.current.scrollHeight);
+      }
+    }
+  }, [messages, isSendingMessage]);
+
+
 
   return (
-    <div className="group/message mx-auto w-full max-w-3xl px-4 h-full">
-      <div className="flex h-full">
-        {data ? (
-          data.length === 1 &&
-            data[0].message === DEFAULT_BOT_MESSAGE ? (
-            <MessagePopover key={data[0].id} />
-          ) : (
-            <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">
-              {data.map((message) => {
-                const messageId = message.id;
-                return messageId === 'deleteme_' ? (
-                  <Ellipsis key={messageId} className="animate-pulse" />
-                ) : (
-                  <MessagePill
-                    key={messageId}
-                    message={message.message}
-                    sender={message.messageType}
-                  />
-                );
-              })}
-            </div>
-          )
-        ) : (
-          <div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
-            {isLoading || (isConnected && agents && agents.length === 0) ? (
-              <LoaderCircle className="animate-spin" size={32} />
+    <div ref={messagesListRef} className="flex-1 overflow-auto">
+      <div className="group/message mx-auto w-full max-w-3xl px-4 h-full">
+        <div className="flex h-full">
+
+          {messages ? (
+            messages.length === 1 &&
+            messages[0].message === DEFAULT_BOT_MESSAGE ? (
+              <MessagePopover key={messages[0].id} />
             ) : (
-              ERROR_CONNECTING
-            )}
-          </div>
-        )}
-        <div ref={messagesEndRef} />
+              <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">
+
+                {messages.map((message) => {
+                  return (
+                    <MessagePill
+                      key={message.id}
+                      message={message.message}
+                      sender={message.messageType}
+                    />
+                  )
+                })}
+                {isSendingMessage && (
+                  <div className="flex justify-start">
+                    <Ellipsis size={24} className="animate-spin" />
+                  </div>
+                )}
+              </div>
+            )
+          ) : (
+            <div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
+              {isLoading || (isConnected && agents && agents.length === 0) ? (
+                <LoaderCircle className="animate-spin" size={32} />
+              ) : (
+                ERROR_CONNECTING
+              )}
+            </div>
+          )}
+
+        </div>
       </div>
     </div>
   );

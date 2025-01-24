@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { Letta } from '@letta-ai/letta-client';
 
 interface MessagePillProps {
   message: string;
-  sender: 'user_message' | 'tool_call_message';
+  sender: Letta.agents.MessagesListResponseItem['messageType'];
 }
 
 const MessagePill: React.FC<MessagePillProps> = ({ message, sender }) => {

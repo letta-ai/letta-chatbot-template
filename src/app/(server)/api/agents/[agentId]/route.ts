@@ -11,7 +11,7 @@ async function getAgentById(
     return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 });
   }
   try {
-    const agent = await client.agents.get(agentId);
+    const agent = await client.agents.retrieve(agentId);
     if (!agent) {
       return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
     }

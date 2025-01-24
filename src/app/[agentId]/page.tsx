@@ -5,11 +5,9 @@ import { MessageComposer } from '@/components/message-area/message-composer';
 import { useAgentDetails } from '@/components/ui/agent-details';
 import { AgentDetailDisplay } from '@/components/agent-details/agent-details-display';
 import { useIsMobile } from '@/components/hooks/use-mobile';
-import { useAgentContext } from './context/agent-context';
 
 export default function Home() {
   const { isOpen } = useAgentDetails();
-  const { agentId } = useAgentContext();
   const isMobile = useIsMobile();
 
   return (

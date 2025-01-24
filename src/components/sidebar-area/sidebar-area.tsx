@@ -5,7 +5,7 @@ import { Sidebar } from '../ui/sidebar';
 import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { useCreateAgent } from '../hooks/use-create-agent';
 import { useQueryClient } from '@tanstack/react-query';
-import { USE_AGENTS_KEY } from '../hooks/use-agents';
+import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents';
 import { AgentState } from '@letta-ai/letta-client/api';
 import { StatusCircle } from '../ui/status-circle';
 
@@ -13,6 +13,8 @@ export function SidebarArea() {
   const { agentId, setAgentId } = useAgentContext();
   const queryClient = useQueryClient();
   const { mutate: createAgent, isPending } = useCreateAgent();
+  const { data, isLoading } = useAgents();
+
 
   const handleCreateAgent = () => {
     if (isPending) return;
@@ -42,7 +44,7 @@ export function SidebarArea() {
               }
             }}
           >
-            <StatusCircle isLoading={agentId !== null} />
+            <StatusCircle isConnected={data && data.length > 0} isLoading={isLoading} />
             {window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER'}
           </div>
         </div>
@@ -61,7 +63,7 @@ export function SidebarArea() {
           </Button>
         </div>
       </div>
-      <AppSidebar />
+      {data && data.length > 0 && <AppSidebar agents={data} />}
     </Sidebar>
   );
 }

@@ -4,11 +4,11 @@ import { useAgentContext } from '../../app/[agentId]/context/agent-context';
 import { useAgentMessages } from '../hooks/use-agent-messages';
 import { Ellipsis, LoaderCircle } from 'lucide-react';
 import { MessagePopover } from './message-popover';
-import { DEFAULT_BOT_MESSAGE } from '@/app/lib/labels';
+import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
 
 export const Messages: React.FC = () => {
   const { agentId } = useAgentContext();
-  const { data } = useAgentMessages(agentId);
+  const { data, isLoading } = useAgentMessages(agentId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export const Messages: React.FC = () => {
           )
         ) : (
           <div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
-            <LoaderCircle className="animate-spin" size={32} />
+            {isLoading ? <LoaderCircle className="animate-spin" size={32} /> : ERROR_CONNECTING}
           </div>
         )}
         <div ref={messagesEndRef} />

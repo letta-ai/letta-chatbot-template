@@ -9,7 +9,7 @@ export const ChatHeader: React.FC = () => {
     const { agentId } = useAgentContext();
     const { data: agentData, isLoading } = useAgents();
 
-    const selectedAgent = agentData?.find((a) => a.id === agentId);
+    const selectedAgent = agentData && agentData.length > 0 && agentData?.find((a) => a.id === agentId);
 
     return (
         <>

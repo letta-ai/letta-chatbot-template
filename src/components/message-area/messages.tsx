@@ -5,11 +5,15 @@ import { useAgentMessages } from '../hooks/use-agent-messages';
 import { Ellipsis, LoaderCircle } from 'lucide-react';
 import { MessagePopover } from './message-popover';
 import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
+import { useIsConnected } from '../hooks/use-is-connected';
 
 export const Messages: React.FC = () => {
   const { agentId } = useAgentContext();
   const { data, isLoading } = useAgentMessages(agentId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isConnected = useIsConnected()
+
+  console.log(data, isConnected, '---')
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -42,7 +46,13 @@ export const Messages: React.FC = () => {
           )
         ) : (
           <div className="flex min-w-0 flex-1 flex-col justify-center items-center h-full">
-            {isLoading ? <LoaderCircle className="animate-spin" size={32} /> : ERROR_CONNECTING}
+            {isLoading ? (
+              <LoaderCircle className="animate-spin" size={32} />
+            ) : isConnected && data === undefined ? (
+              'ay yo'
+            ) : (
+              ERROR_CONNECTING
+            )}
           </div>
         )}
         <div ref={messagesEndRef} />

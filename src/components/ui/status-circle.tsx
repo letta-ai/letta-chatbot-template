@@ -8,7 +8,7 @@ interface StatusCircleProps {
 const StatusCircle: React.FC<StatusCircleProps> = ({ isConnected, isLoading }) => {
     return (
         <div
-            className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : isLoading ? 'bg-yellow-500' : 'bg-red-500'} mr-2`}
+            className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-500' : isConnected ? 'bg-green-500' : 'bg-red-500'} mr-2`}
         />
     );
 };

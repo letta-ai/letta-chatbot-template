@@ -1,6 +1,5 @@
 import { AgentDetailsTrigger } from './ui/agent-details';
 import { useAgentContext } from '@/app/[agentId]/context/agent-context';
-import { useAgentState } from './hooks/use-agent-state';
 import { useAgents } from './hooks/use-agents';
 import { SkeletonLoadBlock } from './ui/skeleton-load-block';
 import { SidebarTrigger } from './ui/sidebar';

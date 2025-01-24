@@ -8,13 +8,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents';
 import { AgentState } from '@letta-ai/letta-client/api';
 import { StatusCircle } from '../ui/status-circle';
+import { useIsConnected } from '../hooks/use-is-connected';
 
 export function SidebarArea() {
   const { agentId, setAgentId } = useAgentContext();
   const queryClient = useQueryClient();
   const { mutate: createAgent, isPending } = useCreateAgent();
   const { data, isLoading } = useAgents();
-
+  const isConnected = useIsConnected()
 
   const handleCreateAgent = () => {
     if (isPending) return;
@@ -31,6 +32,8 @@ export function SidebarArea() {
     });
   };
 
+  console.log(data, '->', isLoading);
+
   return (
     <Sidebar>
       <div className="flex flex-row items-center justify-between">
@@ -44,7 +47,7 @@ export function SidebarArea() {
               }
             }}
           >
-            <StatusCircle isConnected={data && data.length > 0} isLoading={isLoading} />
+            <StatusCircle isConnected={isConnected} isLoading={isLoading} />
             {window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER'}
           </div>
         </div>

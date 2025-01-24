@@ -7,6 +7,12 @@ export const USE_AGENTS_KEY = ['agents'];
 export function useAgents() {
   return useQuery<Letta.AgentState[]>({
     queryKey: USE_AGENTS_KEY,
-    queryFn: () => fetch('/api/agents').then((res) => res.json()),
+    retry: 0,
+    queryFn: () => fetch('/api/agents').then((res) => {
+      if (res.status !== 200) {
+        throw new Error();
+      }
+      return res.json()
+    }),
   });
 }

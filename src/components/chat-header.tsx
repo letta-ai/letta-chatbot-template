@@ -12,17 +12,21 @@ export const ChatHeader: React.FC = () => {
 
     return (
         <>
-            <SidebarTrigger />
             <div className="flex-1">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-between">
-                        {isLoading ? (
-                            <SkeletonLoadBlock className="w-[10em] h-[1em]" />
-                        ) : (
-                            <div className="text-l font-bold">{selectedAgent?.name}</div>
-                        )}
+                    <div className="flex items-center gap-2">
+                        <SidebarTrigger />
+                        <div className="">
+                            {isLoading ? (
+                                <SkeletonLoadBlock className="w-[10em] h-[1em]" />
+                            ) : (
+                                <div className="text-l font-bold">{selectedAgent?.name}</div>
+                            )}
+                        </div>
                     </div>
-                    <AgentDetailsTrigger isLoading={isLoading} />
+                    <div>
+                        <AgentDetailsTrigger isLoading={isLoading} />
+                    </div>
                 </div>
             </div>
         </>

@@ -53,7 +53,6 @@ const AgentDetailsTrigger = forwardRef<
             {...props}
         >
             {isLoading ? <LoaderCircle className="animate-spin" size={17} /> : <div className="flex items-center gap-2 text-xs"><span className="font-bold">{isOpen ? 'HIDE MEMORY' : 'SHOW MEMORY'}</span><BrainIcon /></div>}
-            <span className="sr-only">Toggle Agent Details</span>
         </Button>
     );
 });

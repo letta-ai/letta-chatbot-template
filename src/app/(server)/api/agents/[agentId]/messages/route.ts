@@ -5,7 +5,6 @@ import { filterMessages } from '@/lib/utils';
 import { Letta } from '@letta-ai/letta-client';
 
 
-
 async function getAgentMessages(
     _req: NextApiRequest,
     { params }: { params: { agentId: string } },
@@ -13,7 +12,7 @@ async function getAgentMessages(
     try {
         const { agentId } = await params;
         const messages = await client.agents.messages.list(agentId, {
-            limit: 100,
+            limit: 100
         });
 
         const result = filterMessages(messages as Letta.LettaMessageUnion[]);

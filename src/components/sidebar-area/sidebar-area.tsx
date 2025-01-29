@@ -10,6 +10,10 @@ import { StatusCircle } from '../ui/status-circle';
 import { useIsConnected } from '../hooks/use-is-connected';
 import { useEffect, useMemo } from 'react';
 import { AgentState } from '@letta-ai/letta-client/api';
+import { Tooltip } from '../ui/tooltip';
+import { TooltipTrigger } from '../ui/tooltip';
+import { TooltipContent } from '../ui/tooltip';
+import { TooltipProvider } from '../ui/tooltip';
 
 
 export function SidebarArea() {
@@ -54,7 +58,7 @@ export function SidebarArea() {
 
   const hostname = useMemo(() => {
     if (typeof window !== 'undefined') {
-      return window.location.hostname === 'localhost' ? 'LOCAL SERVER' : 'REMOTE SERVER';
+      return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '0.0.0.0' ? 'LOCAL SERVER' : 'REMOTE SERVER';
     }
 
     return 'LOCAL SERVER';
@@ -64,15 +68,23 @@ export function SidebarArea() {
     <Sidebar className="mt-1">
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
-          <div
-            className="flex items-center w-full"
-            onClick={() => {
-              scrollSidebarToCurrentAgent()
-            }}
-          >
-            <StatusCircle isConnected={isConnected} isLoading={isLoading} />
-            {hostname}
-          </div>
+          <Tooltip>
+            <TooltipTrigger>
+              <div
+                className="flex items-center w-full"
+                onClick={() => {
+                  scrollSidebarToCurrentAgent()
+                }}
+              >
+                <StatusCircle isConnected={isConnected} isLoading={isLoading} />
+                {hostname}
+              </div>
+              <TooltipContent>
+                {typeof window !== 'undefined' && window.location.origin}
+              </TooltipContent>
+            </TooltipTrigger>
+          </Tooltip>
+
         </div>
         <div className="flex justify-end p-2">
           <Button

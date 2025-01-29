@@ -27,4 +27,4 @@ export const suggestedChatActions = [
 
 export const TEXTBOX_PLACEHOLDER = 'Send a message...'
 
-export const ERROR_CONNECTING = 'Server not found. Please check your connection.'
+export const ERROR_CONNECTING = 'Issue loading data. Please check your connection.'

@@ -69,7 +69,7 @@ export function SidebarArea() {
         <div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
           <Tooltip>
             <TooltipTrigger>
-              <TooltipTrigger><div
+              <div
                 className="flex items-center w-full"
                 onClick={() => {
                   scrollSidebarToCurrentAgent()
@@ -77,7 +77,7 @@ export function SidebarArea() {
               >
                 <StatusCircle isConnected={isConnected} isLoading={isLoading} />
                 {hostname}
-              </div></TooltipTrigger>
+              </div>
               <TooltipContent>
                 {typeof window !== 'undefined' && window.location.origin}
               </TooltipContent>

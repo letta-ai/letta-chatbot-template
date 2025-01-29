@@ -67,24 +67,22 @@ export function SidebarArea() {
     <Sidebar>
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <TooltipTrigger><div
-                  className="flex items-center w-full"
-                  onClick={() => {
-                    scrollSidebarToCurrentAgent()
-                  }}
-                >
-                  <StatusCircle isConnected={isConnected} isLoading={isLoading} />
-                  {hostname}
-                </div></TooltipTrigger>
-                <TooltipContent>
-                  {typeof window !== 'undefined' && window.location.origin}
-                </TooltipContent>
-              </TooltipTrigger>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <TooltipTrigger><div
+                className="flex items-center w-full"
+                onClick={() => {
+                  scrollSidebarToCurrentAgent()
+                }}
+              >
+                <StatusCircle isConnected={isConnected} isLoading={isLoading} />
+                {hostname}
+              </div></TooltipTrigger>
+              <TooltipContent>
+                {typeof window !== 'undefined' && window.location.origin}
+              </TooltipContent>
+            </TooltipTrigger>
+          </Tooltip>
 
         </div>
         <div className="flex justify-end p-2">

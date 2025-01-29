@@ -8,8 +8,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents';
 import { StatusCircle } from '../ui/status-circle';
 import { useIsConnected } from '../hooks/use-is-connected';
-import {useEffect, useMemo} from 'react';
+import { useEffect, useMemo } from 'react';
 import { AgentState } from '@letta-ai/letta-client/api';
+
 
 export function SidebarArea() {
   const { agentId, setAgentId } = useAgentContext();
@@ -60,7 +61,7 @@ export function SidebarArea() {
   }, [])
 
   return (
-    <Sidebar>
+    <Sidebar className="mt-1">
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs font-bold relative flex w-full min-w-0 cursor-default p-2.5 pl-4">
           <div

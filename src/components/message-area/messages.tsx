@@ -7,7 +7,10 @@ import { MessagePopover } from './message-popover';
 import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
 import { useIsConnected } from '../hooks/use-is-connected';
 import { useAgents } from '../hooks/use-agents';
-import {UseSendMessageType} from "@/components/hooks/use-send-message";
+import { UseSendMessageType } from "@/components/hooks/use-send-message";
+import { MESSAGE_TYPE } from '@/types';
+import { ReasoningMessageBlock } from '@/components/ui/reasoning-message';
+import { useReasoningMessage } from '@/components/toggle-reasoning-messages';
 
 interface MessagesProps {
   isSendingMessage: boolean;
@@ -17,6 +20,7 @@ interface MessagesProps {
 export const Messages = (props: MessagesProps) => {
   const { isSendingMessage, sendMessage } = props;
   const { agentId } = useAgentContext();
+  const { isEnabled } = useReasoningMessage();
   const { data: messages, isLoading } = useAgentMessages(agentId);
   const { data: agents } = useAgents()
 
@@ -50,27 +54,28 @@ export const Messages = (props: MessagesProps) => {
   }, [messages, isSendingMessage]);
 
 
-
   return (
     <div ref={messagesListRef} className="flex-1 overflow-auto">
       <div className="group/message mx-auto w-full max-w-3xl px-4 h-full">
         <div className="flex h-full">
-
           {messages ? (
             messages.length === 1 &&
-            messages[0].message === DEFAULT_BOT_MESSAGE ? (
+              messages[0].message === DEFAULT_BOT_MESSAGE ? (
               <MessagePopover sendMessage={sendMessage} key={messages[0].id} />
             ) : (
               <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">
-
                 {messages.map((message) => {
-                  return (
-                    <MessagePill
-                      key={message.id}
-                      message={message.message}
-                      sender={message.messageType}
-                    />
-                  )
+                  if (message.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
+                    return <ReasoningMessageBlock message={message.message} isEnabled={isEnabled} />
+                  } else {
+                    return (
+                      <MessagePill
+                        key={message.id}
+                        message={message.message}
+                        sender={message.messageType}
+                      />
+                    )
+                  }
                 })}
                 {isSendingMessage && (
                   <div className="flex justify-start">
@@ -88,7 +93,6 @@ export const Messages = (props: MessagesProps) => {
               )}
             </div>
           )}
-
         </div>
       </div>
     </div>

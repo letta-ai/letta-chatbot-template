@@ -5,6 +5,7 @@ import Providers from './providers';
 import { AgentDetailsProvider } from '@/components/ui/agent-details';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import ContentLayout from './content-layout';
+import { ReasoningMessageProvider } from '@/components/toggle-reasoning-messages';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,9 +33,11 @@ export default function RootLayout({
         <Providers>
           <SidebarProvider>
             <AgentDetailsProvider>
-              <ContentLayout>
-                {children}
-              </ContentLayout>
+              <ReasoningMessageProvider>
+                <ContentLayout>
+                  {children}
+                </ContentLayout>
+              </ReasoningMessageProvider>
             </AgentDetailsProvider>
           </SidebarProvider>
         </Providers>

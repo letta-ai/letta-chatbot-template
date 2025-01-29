@@ -28,7 +28,7 @@ export default function ContentLayout({ children }: { children: React.ReactNode 
     <>
       <SidebarArea />
       <main className="relative flex h-dvh w-dvw flex-col overflow-hidden">
-        <div className="flex border-b border-border p-2.5 gap-3">
+        <div className="flex border-b border-border p-2.5 gap-3 w-full">
           <ChatHeader />
         </div>
         {children}

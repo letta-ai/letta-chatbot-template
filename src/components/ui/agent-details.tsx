@@ -44,7 +44,7 @@ const AgentDetailsTrigger = forwardRef<
             data-sidebar="trigger"
             variant="ghost"
             size="icon"
-            className={cn(`flex w-full px-2 ${isOpen ? 'bg-accent' : ''}`, className)}
+            className={cn(`flex w-max px-2 h-full ${isOpen ? 'bg-accent' : ''}`, className)}
             onClick={(event) => {
                 onClick?.(event);
                 setIsOpen(!isOpen);
@@ -52,7 +52,7 @@ const AgentDetailsTrigger = forwardRef<
             disabled={isLoading}
             {...props}
         >
-            {isLoading ? <LoaderCircle className="animate-spin" size={17} /> : <div className="flex items-center gap-2 text-xs"><span className="font-bold">{isOpen ? 'HIDE MEMORY' : 'SHOW MEMORY'}</span><BrainIcon /></div>}
+            {<div className="flex gap-2 text-xs"><span className="font-bold">{isOpen ? 'HIDE MEMORY' : 'SHOW MEMORY'}</span><BrainIcon /></div>}
         </Button>
     );
 });

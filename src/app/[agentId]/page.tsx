@@ -17,8 +17,14 @@ export default function Home() {
     <div className="flex flex-row flex-1 h-0">
       {!isMobile || (isMobile && !isOpen) ? (
         <div className="relative flex flex-col flex-1 h-full min-w-0 gap-5 overflow-hidden bg-background pt-4">
-          <Messages sendMessage={sendMessage} isSendingMessage={isPending} />
-          <MessageComposer sendMessage={sendMessage} isSendingMessage={isPending} />
+          <Messages
+            sendMessage={sendMessage}
+            isSendingMessage={isPending}
+          />
+          <MessageComposer
+            sendMessage={sendMessage}
+            isSendingMessage={isPending}
+          />
         </div>
       ) : null}
       <AgentDetailDisplay />

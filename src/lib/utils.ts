@@ -6,7 +6,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getMessageId = (message: Letta.agents.LettaStreamingResponse) => {
+export const getMessageId = (
+  message: Letta.agents.LettaStreamingResponse,
+) => {
   if (message.messageType === 'usage_statistics') {
     return message.messageType;
   }

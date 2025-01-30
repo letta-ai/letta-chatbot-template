@@ -20,7 +20,9 @@ export function AgentArchivalMemory() {
           </div>
         ))
       ) : (
-        <span className="text-sm text-muted-foreground">No memory available</span>
+        <span className="text-sm text-muted-foreground">
+          No memory available
+        </span>
       )}
     </div>
   );

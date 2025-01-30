@@ -13,6 +13,9 @@ if (!BASE_URL) {
   console.error('BASE_URL is not set. We are using your localhost.');
 }
 
-const client = new LettaClient({ token: LETTA_TOKEN, baseUrl: BASE_URL });
+const client = new LettaClient({
+  token: LETTA_TOKEN,
+  baseUrl: BASE_URL,
+});
 
 export default client;

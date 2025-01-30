@@ -7,7 +7,9 @@ export function useAgentArchivalMemory(agentId: string) {
   return useQuery<Letta.Passage[]>({
     queryKey: [...USE_AGENT_ARCHIVAL_MEMORY_KEY, agentId],
     queryFn: async () => {
-      const response = await fetch(`/api/agents/${agentId}/archival_memory`);
+      const response = await fetch(
+        `/api/agents/${agentId}/archival_memory`,
+      );
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

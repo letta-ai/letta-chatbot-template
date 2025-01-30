@@ -2,7 +2,9 @@ import { getMessageId } from '@/lib/utils';
 import { AppMessage, MESSAGE_TYPE } from '@/types';
 import * as Letta from '@letta-ai/letta-client/api';
 
-const tryParseAssistantExtractedMessage = (message: string): string | null => {
+const tryParseAssistantExtractedMessage = (
+  message: string,
+): string | null => {
   try {
     const parsed = JSON.parse(message);
     if (parsed.message) {
@@ -15,7 +17,9 @@ const tryParseAssistantExtractedMessage = (message: string): string | null => {
   }
 };
 
-function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
+function extractMessage(
+  item: Letta.LettaMessageUnion,
+): AppMessage | null {
   const { messageType } = item;
 
   if (messageType === MESSAGE_TYPE.USER_MESSAGE) {
@@ -23,7 +27,10 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       return null;
     }
 
-    const message = typeof item.content === 'string' ? item.content : item.content.text;
+    const message =
+      typeof item.content === 'string'
+        ? item.content
+        : item.content.text;
     if (!message) {
       return null;
     }
@@ -69,9 +76,14 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
   return null;
 }
 
-export function filterMessages(data: Letta.LettaMessageUnion[]): AppMessage[] {
+export function filterMessages(
+  data: Letta.LettaMessageUnion[],
+): AppMessage[] {
   return data
     .map((item) => extractMessage(item))
     .filter((item) => item !== null)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .sort(
+      (a, b) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
 }

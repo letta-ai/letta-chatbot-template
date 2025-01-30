@@ -23,11 +23,19 @@ function AgentDetailDisplayContent() {
   return (
     <div className="pt-2 px-6">
       {[
-        { title: 'CORE MEMORY', component: <AgentCoreMemoryBlock /> },
-        { title: 'ARCHIVAL MEMORY', component: <AgentArchivalMemory /> },
+        {
+          title: 'CORE MEMORY',
+          component: <AgentCoreMemoryBlock />,
+        },
+        {
+          title: 'ARCHIVAL MEMORY',
+          component: <AgentArchivalMemory />,
+        },
       ].map((section, index) => (
         <section key={index} className="pb-4">
-          <header className="text-[0.75rem] font-bold py-4">{section.title}</header>
+          <header className="text-[0.75rem] font-bold py-4">
+            {section.title}
+          </header>
           <div className="flex">
             <LeftBar />
             {section.component}

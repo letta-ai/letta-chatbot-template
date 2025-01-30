@@ -1,4 +1,5 @@
-export const DEFAULT_BOT_MESSAGE = 'More human than human is our motto.';
+export const DEFAULT_BOT_MESSAGE =
+  'More human than human is our motto.';
 export const NO_MESSAGES_LABEL = 'Start a chat...';
 
 export const MESSAGE_POPOVER_DESCRIPTION =
@@ -28,4 +29,5 @@ export const suggestedChatActions = [
 
 export const TEXTBOX_PLACEHOLDER = 'Send a message...';
 
-export const ERROR_CONNECTING = 'Issue loading data. Please check your connection.';
+export const ERROR_CONNECTING =
+  'Issue loading data. Please check your connection.';

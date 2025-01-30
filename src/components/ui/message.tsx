@@ -8,7 +8,10 @@ interface MessagePillProps {
   sender: Letta.agents.MessagesListResponseItem['messageType'];
 }
 
-const MessagePill: React.FC<MessagePillProps> = ({ message, sender }) => {
+const MessagePill: React.FC<MessagePillProps> = ({
+  message,
+  sender,
+}) => {
   return (
     <div
       className={cn(

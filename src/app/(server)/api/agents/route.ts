@@ -14,7 +14,10 @@ async function getAgents(req: NextApiRequest) {
     return NextResponse.json(sortedAgents);
   } catch (error) {
     console.error('Error fetching agents:', error);
-    return NextResponse.json({ error: 'Error fetching agents' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Error fetching agents' },
+      { status: 500 },
+    );
   }
 }
 
@@ -34,7 +37,10 @@ async function createAgent(req: NextApiRequest) {
     return NextResponse.json(newAgent);
   } catch (error) {
     console.error('Error creating agent:', error);
-    return NextResponse.json({ error: 'Error creating agent' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Error creating agent' },
+      { status: 500 },
+    );
   }
 }
 

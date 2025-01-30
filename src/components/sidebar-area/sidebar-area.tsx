@@ -30,7 +30,9 @@ export function SidebarArea() {
   };
 
   const scrollSidebarToCurrentAgent = () => {
-    document.getElementById(agentId)?.scrollIntoView({ behavior: 'smooth' });
+    document
+      .getElementById(agentId)
+      ?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleCreateAgent = () => {
@@ -79,11 +81,15 @@ export function SidebarArea() {
                   scrollSidebarToCurrentAgent();
                 }}
               >
-                <StatusCircle isConnected={isConnected} isLoading={isLoading} />
+                <StatusCircle
+                  isConnected={isConnected}
+                  isLoading={isLoading}
+                />
                 {hostname}
               </div>
               <TooltipContent>
-                {typeof window !== 'undefined' && window.location.origin}
+                {typeof window !== 'undefined' &&
+                  window.location.origin}
               </TooltipContent>
             </TooltipTrigger>
           </Tooltip>

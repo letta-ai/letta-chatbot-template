@@ -3,18 +3,25 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { BrainIcon, LoaderCircle } from 'lucide-react';
-import { createContext, forwardRef, useContext, useState } from 'react';
+import {
+  createContext,
+  forwardRef,
+  useContext,
+  useState,
+} from 'react';
 
 interface AgentDetailsContextProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
-const AgentDetailsContext = createContext<AgentDetailsContextProps | undefined>(
-  undefined,
-);
+const AgentDetailsContext = createContext<
+  AgentDetailsContextProps | undefined
+>(undefined);
 
-const AgentDetailsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AgentDetailsProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -27,14 +34,18 @@ const AgentDetailsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 function useAgentDetails() {
   const context = useContext(AgentDetailsContext);
   if (!context) {
-    throw new Error('useAgentDetails must be used within a AgentDetailsProvider.');
+    throw new Error(
+      'useAgentDetails must be used within a AgentDetailsProvider.',
+    );
   }
   return context;
 }
 
 const AgentDetailsTrigger = forwardRef<
   React.ElementRef<typeof Button>,
-  React.ComponentProps<typeof Button> & { isLoading: boolean }
+  React.ComponentProps<typeof Button> & {
+    isLoading: boolean;
+  }
 >(({ className, onClick, isLoading, ...props }, ref) => {
   const { isOpen, setIsOpen } = useAgentDetails();
 
@@ -44,7 +55,10 @@ const AgentDetailsTrigger = forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn(`flex w-max px-2 h-full ${isOpen ? 'bg-accent' : ''}`, className)}
+      className={cn(
+        `flex w-max px-2 h-full ${isOpen ? 'bg-accent' : ''}`,
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event);
         setIsOpen(!isOpen);
@@ -54,7 +68,9 @@ const AgentDetailsTrigger = forwardRef<
     >
       {
         <div className="flex gap-2 text-xs">
-          <span className="font-bold">{isOpen ? 'HIDE MEMORY' : 'SHOW MEMORY'}</span>
+          <span className="font-bold">
+            {isOpen ? 'HIDE MEMORY' : 'SHOW MEMORY'}
+          </span>
           <BrainIcon />
         </div>
       }

@@ -8,13 +8,20 @@ async function getAgentArchivalMemory(
 ) {
   const { agentId } = await params;
   if (!agentId) {
-    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Agent ID is required' },
+      { status: 400 },
+    );
   }
   try {
-    const archivalMemory = await client.agents.archivalMemory.list(agentId);
+    const archivalMemory =
+      await client.agents.archivalMemory.list(agentId);
 
     if (!archivalMemory) {
-      return NextResponse.json({ error: 'Archival memory not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Archival memory not found' },
+        { status: 404 },
+      );
     }
     return NextResponse.json(archivalMemory);
   } catch (error) {

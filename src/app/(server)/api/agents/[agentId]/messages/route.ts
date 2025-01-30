@@ -14,7 +14,9 @@ async function getAgentMessages(
       limit: 100,
     });
 
-    const result = filterMessages(messages as Letta.LettaMessageUnion[]);
+    const result = filterMessages(
+      messages as Letta.LettaMessageUnion[],
+    );
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error fetching messages:', error);
@@ -35,18 +37,23 @@ async function sendMessage(
   return new NextResponse(
     new ReadableStream({
       async start(controller) {
-        const response = await client.agents.messages.createStream(agentId, {
-          streamTokens: true,
-          messages: [
-            {
-              role,
-              content: text,
-            },
-          ],
-        });
+        const response = await client.agents.messages.createStream(
+          agentId,
+          {
+            streamTokens: true,
+            messages: [
+              {
+                role,
+                content: text,
+              },
+            ],
+          },
+        );
 
         for await (const message of response) {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify(message)}\n\n`));
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify(message)}\n\n`),
+          );
         }
 
         controller.close();

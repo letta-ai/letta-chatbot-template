@@ -8,17 +8,26 @@ async function getAgentById(
 ) {
   const { agentId } = await params;
   if (!agentId) {
-    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Agent ID is required' },
+      { status: 400 },
+    );
   }
   try {
     const agent = await client.agents.retrieve(agentId);
     if (!agent) {
-      return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Agent not found' },
+        { status: 404 },
+      );
     }
     return NextResponse.json(agent);
   } catch (error) {
     console.error('Error fetching agent:', error);
-    return NextResponse.json({ error: 'Error fetching agent' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Error fetching agent' },
+      { status: 500 },
+    );
   }
 }
 

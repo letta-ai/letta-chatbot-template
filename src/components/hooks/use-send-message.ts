@@ -57,13 +57,18 @@ export function useSendMessage() {
                 return _data;
               }
 
-              const data = _data.filter((message) => message.id !== 'deleteme_');
+              const data = _data.filter(
+                (message) => message.id !== 'deleteme_',
+              );
 
               const existingMessage = data.find(
                 (message) => message.id === getMessageId(response),
               );
 
-              if (response.messageType === MESSAGE_TYPE.ASSISTANT_MESSAGE) {
+              if (
+                response.messageType ===
+                MESSAGE_TYPE.ASSISTANT_MESSAGE
+              ) {
                 if (existingMessage) {
                   return data.map((message) => {
                     if (message.id === getMessageId(response)) {
@@ -92,7 +97,10 @@ export function useSendMessage() {
                 ];
               }
 
-              if (response.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
+              if (
+                response.messageType ===
+                MESSAGE_TYPE.REASONING_MESSAGE
+              ) {
                 if (existingMessage) {
                   return data.map((message) => {
                     if (message.id === getMessageId(response)) {

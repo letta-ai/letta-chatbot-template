@@ -11,7 +11,9 @@ export const ChatHeader: React.FC = () => {
   const { data: agentData, isLoading } = useAgents();
 
   const selectedAgent =
-    agentData && agentData.length > 0 && agentData?.find((a) => a.id === agentId);
+    agentData &&
+    agentData.length > 0 &&
+    agentData?.find((a) => a.id === agentId);
 
   return (
     <>
@@ -23,13 +25,18 @@ export const ChatHeader: React.FC = () => {
               {isLoading ? (
                 <SkeletonLoadBlock className="w-[10em] h-[1em]" />
               ) : (
-                <div className="text-l font-bold truncate">{selectedAgent?.name}</div>
+                <div className="text-l font-bold truncate">
+                  {selectedAgent?.name}
+                </div>
               )}
             </div>
           </div>
           <div className="flex h-[2em]">
             {isLoading ? (
-              <LoaderCircle className="flex w-max h-max animate-spin" size={17} />
+              <LoaderCircle
+                className="flex w-max h-max animate-spin"
+                size={17}
+              />
             ) : (
               <div className="flex flex-row gap-1">
                 <ReasoningMessageSwitch />

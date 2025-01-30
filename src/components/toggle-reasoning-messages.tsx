@@ -8,17 +8,19 @@ interface ReasoningMessageContextProps {
   setIsEnabled: (enabled: boolean) => void;
 }
 
-const ReasoningMessageContext = createContext<ReasoningMessageContextProps | undefined>(
-  undefined,
-);
+const ReasoningMessageContext = createContext<
+  ReasoningMessageContextProps | undefined
+>(undefined);
 
-const ReasoningMessageProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const ReasoningMessageProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [isEnabled, setIsEnabled] = useState<boolean>(true);
 
   return (
-    <ReasoningMessageContext.Provider value={{ isEnabled, setIsEnabled }}>
+    <ReasoningMessageContext.Provider
+      value={{ isEnabled, setIsEnabled }}
+    >
       {children}
     </ReasoningMessageContext.Provider>
   );
@@ -51,4 +53,8 @@ function ReasoningMessageSwitch() {
   );
 }
 
-export { ReasoningMessageProvider, useReasoningMessage, ReasoningMessageSwitch };
+export {
+  ReasoningMessageProvider,
+  useReasoningMessage,
+  ReasoningMessageSwitch,
+};

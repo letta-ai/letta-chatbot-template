@@ -1,7 +1,10 @@
 import { AppMessage } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 
-export const getAgentMessagesQueryKey = (agentId: string) => ['agentMessages', agentId];
+export const getAgentMessagesQueryKey = (agentId: string) => [
+  'agentMessages',
+  agentId,
+];
 
 export function useAgentMessages(agentId: string) {
   return useQuery<AppMessage[]>({

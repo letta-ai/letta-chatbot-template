@@ -46,7 +46,6 @@ async function sendMessage(
         });
 
         for await (const message of response) {
-          console.log('->', message);
           controller.enqueue(encoder.encode(`data: ${JSON.stringify(message)}\n\n`));
         }
 

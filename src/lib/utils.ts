@@ -1,17 +1,15 @@
-import { Letta } from '@letta-ai/letta-client';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { Letta } from '@letta-ai/letta-client'
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
-export const getMessageId = (
-  message: Letta.agents.LettaStreamingResponse,
-) => {
+export const getMessageId = (message: Letta.agents.LettaStreamingResponse) => {
   if (message.messageType === 'usage_statistics') {
-    return message.messageType;
+    return message.messageType
   }
 
-  return message.messageType + message.id;
-};
+  return message.messageType + message.id
+}

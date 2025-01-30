@@ -1,8 +1,8 @@
-'use client';
-import { Letta } from '@letta-ai/letta-client';
-import { useQuery } from '@tanstack/react-query';
+'use client'
+import { Letta } from '@letta-ai/letta-client'
+import { useQuery } from '@tanstack/react-query'
 
-export const USE_AGENTS_KEY = ['agents'];
+export const USE_AGENTS_KEY = ['agents']
 
 export function useAgents() {
   return useQuery<Letta.AgentState[]>({
@@ -11,9 +11,9 @@ export function useAgents() {
     queryFn: () =>
       fetch('/api/agents').then((res) => {
         if (res.status !== 200) {
-          throw new Error();
+          throw new Error()
         }
-        return res.json();
+        return res.json()
       }),
-  });
+  })
 }

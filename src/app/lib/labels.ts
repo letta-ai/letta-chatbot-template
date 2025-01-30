@@ -1,9 +1,8 @@
-export const DEFAULT_BOT_MESSAGE =
-  'More human than human is our motto.';
-export const NO_MESSAGES_LABEL = 'Start a chat...';
+export const DEFAULT_BOT_MESSAGE = 'More human than human is our motto.'
+export const NO_MESSAGES_LABEL = 'Start a chat...'
 
 export const MESSAGE_POPOVER_DESCRIPTION =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 export const suggestedChatActions = [
   {
     title: 'What is Letta?',
@@ -25,9 +24,9 @@ export const suggestedChatActions = [
     description: 'Card Description',
     action: 'Lorum ipsum 3',
   },
-];
+]
 
-export const TEXTBOX_PLACEHOLDER = 'Send a message...';
+export const TEXTBOX_PLACEHOLDER = 'Send a message...'
 
 export const ERROR_CONNECTING =
-  'Issue loading data. Please check your connection.';
+  'Issue loading data. Please check your connection.'

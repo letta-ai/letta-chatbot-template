@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query'
 
 export function useCreateAgent() {
   return useMutation({
@@ -8,7 +8,7 @@ export function useCreateAgent() {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((response) => response.json());
+      }).then((response) => response.json())
     },
-  });
+  })
 }

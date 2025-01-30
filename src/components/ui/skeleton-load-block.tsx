@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 interface SkeletonLoadBlockProps {
-  className?: string;
-  accent?: number;
+  className?: string
+  accent?: number
 }
 
 export const SkeletonLoadBlock: React.FC<SkeletonLoadBlockProps> = ({
@@ -13,5 +13,5 @@ export const SkeletonLoadBlock: React.FC<SkeletonLoadBlockProps> = ({
     <div
       className={`bg-gray-${accent} rounded animate-pulse ${className}`}
     ></div>
-  );
-};
+  )
+}

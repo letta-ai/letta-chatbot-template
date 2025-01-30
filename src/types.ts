@@ -1,10 +1,10 @@
-import { AssistantMessageContent } from '@letta-ai/letta-client/api/types';
+import { AssistantMessageContent } from '@letta-ai/letta-client/api/types'
 
 export interface AppMessage {
-  id: string;
-  date: number;
-  message: AssistantMessageContent;
-  messageType: MESSAGE_TYPE;
+  id: string
+  date: number
+  message: AssistantMessageContent
+  messageType: MESSAGE_TYPE
 }
 
 export enum MESSAGE_TYPE {

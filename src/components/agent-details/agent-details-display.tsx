@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { AgentCoreMemoryBlock } from './agent-core-memory-block';
-import { AgentArchivalMemory } from './agent-archival-memory';
-import { useAgentDetails } from '../ui/agent-details';
-import { useIsMobile } from '../hooks/use-mobile';
-import { LeftBar } from '../ui/left-bar';
+import { AgentCoreMemoryBlock } from './agent-core-memory-block'
+import { AgentArchivalMemory } from './agent-archival-memory'
+import { useAgentDetails } from '../ui/agent-details'
+import { useIsMobile } from '../hooks/use-mobile'
+import { LeftBar } from '../ui/left-bar'
 
 export function AgentDetailDisplay() {
-  const { isOpen } = useAgentDetails();
-  const isMobile = useIsMobile();
+  const { isOpen } = useAgentDetails()
+  const isMobile = useIsMobile()
 
   return (
     <div
@@ -16,12 +16,12 @@ export function AgentDetailDisplay() {
     >
       <AgentDetailDisplayContent />
     </div>
-  );
+  )
 }
 
 function AgentDetailDisplayContent() {
   return (
-    <div className="pt-2 px-6">
+    <div className='pt-2 px-6'>
       {[
         {
           title: 'CORE MEMORY',
@@ -32,16 +32,16 @@ function AgentDetailDisplayContent() {
           component: <AgentArchivalMemory />,
         },
       ].map((section, index) => (
-        <section key={index} className="pb-4">
-          <header className="text-[0.75rem] font-bold py-4">
+        <section key={index} className='pb-4'>
+          <header className='text-[0.75rem] font-bold py-4'>
             {section.title}
           </header>
-          <div className="flex">
+          <div className='flex'>
             <LeftBar />
             {section.component}
           </div>
         </section>
       ))}
     </div>
-  );
+  )
 }

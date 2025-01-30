@@ -1,27 +1,27 @@
-import React from 'react';
-import { Card, CardDescription, CardHeader } from '../ui/card';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { UseSendMessageType } from '../hooks/use-send-message';
-import { useAgentContext } from '@/app/[agentId]/context/agent-context';
+import React from 'react'
+import { Card, CardDescription, CardHeader } from '../ui/card'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { UseSendMessageType } from '../hooks/use-send-message'
+import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 import {
   MESSAGE_POPOVER_DESCRIPTION,
   suggestedChatActions,
-} from '@/app/lib/labels';
-import Markdown from 'react-markdown';
+} from '@/app/lib/labels'
+import Markdown from 'react-markdown'
 
 interface MessagePopoverProps {
-  sendMessage: (options: UseSendMessageType) => void;
+  sendMessage: (options: UseSendMessageType) => void
 }
 
 export const MessagePopover = (props: MessagePopoverProps) => {
-  const isMobile = useIsMobile();
-  const { sendMessage } = props;
-  const { agentId } = useAgentContext();
+  const isMobile = useIsMobile()
+  const { sendMessage } = props
+  const { agentId } = useAgentContext()
 
   return (
-    <div className="flex flex-col items-center h-full justify-between">
-      <div className="flex top-component pt-20">
-        <p className="text-center">
+    <div className='flex flex-col items-center h-full justify-between'>
+      <div className='flex top-component pt-20'>
+        <p className='text-center'>
           <Markdown>{MESSAGE_POPOVER_DESCRIPTION}</Markdown>
         </p>
       </div>
@@ -37,12 +37,12 @@ export const MessagePopover = (props: MessagePopoverProps) => {
                 sendMessage({
                   agentId: agentId,
                   text: card.action,
-                });
+                })
               }}
-              className="cursor-pointer shadow-none hover:bg-accent transition-shadow duration-300"
+              className='cursor-pointer shadow-none hover:bg-accent transition-shadow duration-300'
             >
               <CardHeader>
-                <p className="text-sm font-medium leading-none !font-bold">
+                <p className='text-sm font-medium leading-none !font-bold'>
                   {card.title}
                 </p>
                 <CardDescription>{card.description}</CardDescription>
@@ -51,5 +51,5 @@ export const MessagePopover = (props: MessagePopoverProps) => {
           ))}
       </div>
     </div>
-  );
-};
+  )
+}

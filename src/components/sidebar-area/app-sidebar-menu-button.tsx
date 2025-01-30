@@ -2,24 +2,21 @@ import {
   SidebarMenuButton,
   useSidebar,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { useAgentContext } from '@/app/[agentId]/context/agent-context';
-import { useIsMobile } from '@/components/hooks/use-mobile';
-import { useAgentMessages } from '../hooks/use-agent-messages';
-import { SkeletonLoadBlock } from '../ui/skeleton-load-block';
-import {
-  DEFAULT_BOT_MESSAGE,
-  NO_MESSAGES_LABEL,
-} from '@/app/lib/labels';
-import { AgentState } from '@letta-ai/letta-client/api';
+} from '@/components/ui/sidebar'
+import { useAgentContext } from '@/app/[agentId]/context/agent-context'
+import { useIsMobile } from '@/components/hooks/use-mobile'
+import { useAgentMessages } from '../hooks/use-agent-messages'
+import { SkeletonLoadBlock } from '../ui/skeleton-load-block'
+import { DEFAULT_BOT_MESSAGE, NO_MESSAGES_LABEL } from '@/app/lib/labels'
+import { AgentState } from '@letta-ai/letta-client/api'
 
 export const AppSidebarMenuButton: React.FC<{
-  agent: AgentState;
+  agent: AgentState
 }> = ({ agent }) => {
-  const { data } = useAgentMessages(agent.id);
-  const isMobile = useIsMobile();
-  const { toggleSidebar } = useSidebar();
-  const { agentId, setAgentId } = useAgentContext();
+  const { data } = useAgentMessages(agent.id)
+  const isMobile = useIsMobile()
+  const { toggleSidebar } = useSidebar()
+  const { agentId, setAgentId } = useAgentContext()
 
   return (
     <div
@@ -29,30 +26,29 @@ export const AppSidebarMenuButton: React.FC<{
         id={agent.id}
         asChild
         isActive={agent.id === agentId}
-        className="overflow-hidden whitespace-nowrap h-full"
+        className='overflow-hidden whitespace-nowrap h-full'
         onClick={() => {
           if (isMobile) {
-            toggleSidebar();
+            toggleSidebar()
           }
-          setAgentId(agent.id);
+          setAgentId(agent.id)
         }}
       >
-        <div className="overflow-hidden flex-col">
-          <span className="block w-full truncate">{agent.name}</span>
-          <span className="block w-full truncate text-muted-foreground">
+        <div className='overflow-hidden flex-col'>
+          <span className='block w-full truncate'>{agent.name}</span>
+          <span className='block w-full truncate text-muted-foreground'>
             {data ? (
-              data[data.length - 1].message ===
-              DEFAULT_BOT_MESSAGE ? (
+              data[data.length - 1].message === DEFAULT_BOT_MESSAGE ? (
                 <i>{NO_MESSAGES_LABEL}</i>
               ) : (
                 `${data[data.length - 1].message}`
               )
             ) : (
-              <SkeletonLoadBlock className="w-full h-[1.43em]" />
+              <SkeletonLoadBlock className='w-full h-[1.43em]' />
             )}
           </span>
         </div>
       </SidebarMenuButton>
     </div>
-  );
-};
+  )
+}

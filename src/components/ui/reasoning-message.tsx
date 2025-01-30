@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { LeftBar } from './left-bar';
+import * as React from 'react'
+import { LeftBar } from './left-bar'
 
 interface ReasoningMessageProps {
-  message: string;
-  isEnabled: boolean;
+  message: string
+  isEnabled: boolean
 }
 
 const ReasoningMessageBlock: React.FC<ReasoningMessageProps> = ({
@@ -15,11 +15,9 @@ const ReasoningMessageBlock: React.FC<ReasoningMessageProps> = ({
       className={`flex w-max max-w-[100%] px-3 py-2 text-sm ${!isEnabled && 'hidden'}`}
     >
       <LeftBar />
-      <div className="text-sm text-muted-foreground italic">
-        {message}
-      </div>
+      <div className='text-sm text-muted-foreground italic'>{message}</div>
     </div>
-  );
-};
+  )
+}
 
-export { ReasoningMessageBlock };
+export { ReasoningMessageBlock }

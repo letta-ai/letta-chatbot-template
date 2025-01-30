@@ -45,9 +45,11 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 
 ## 🚀 Running the app locally
 
-#### 🔸 Set up your local Letta AI server
+#### 🔸 Set up your local Letta server
 
-Follow the [quickstart guide](https://github.com/letta-ai/letta?tab=readme-ov-file#-quickstart) to run your local Letta AI server.
+Follow the [quickstart guide](https://docs.letta.com/quickstart) to run your local Letta server.
+You can run your own Letta server using [Letta Desktop](https://docs.letta.com/quickstart/desktop) or [Docker](https://docs.letta.com/quickstart/docker).
+By default, the Letta server will run on `http://localhost:8283`.
 
 #### 🔸 Setup and run the app
 

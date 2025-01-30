@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'LettaAI - Demo Chat App',
-  description: 'demo chat app by LettaAI'
-}
+  title: 'Letta Chatbot with Memory Template',
+  description: 'An example chatbot application built on the Letta API, which makes each chatbot a stateful agent (agent with memory) under the hood.',
+};
 
 export default function RootLayout({
   children

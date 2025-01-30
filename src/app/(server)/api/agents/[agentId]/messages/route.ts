@@ -1,7 +1,7 @@
 import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import client from '@/config/letta-client';
-import { filterMessages } from '@/lib/utils';
+import { filterMessages } from './helpers';
 import { Letta } from '@letta-ai/letta-client';
 
 
@@ -47,6 +47,7 @@ async function sendMessage(
                 });
 
                 for await (const message of response) {
+                    console.log('->', message)
                     controller.enqueue(encoder.encode(`data: ${JSON.stringify(message)}\n\n`));
                 }
 

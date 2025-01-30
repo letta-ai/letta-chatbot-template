@@ -65,8 +65,8 @@ export const Messages = (props: MessagesProps) => {
             ) : (
               <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">
                 {messages.map((message) => {
-                  if (message.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
-                    return <ReasoningMessageBlock message={message.message} isEnabled={isEnabled} />
+                  if ([MESSAGE_TYPE.REASONING_MESSAGE, MESSAGE_TYPE.TOOL_CALL_MESSAGE].includes(message.messageType)) {
+                    return <ReasoningMessageBlock key={message.id} message={message.message} isEnabled={isEnabled} />
                   } else {
                     return (
                       <MessagePill
@@ -79,7 +79,7 @@ export const Messages = (props: MessagesProps) => {
                 })}
                 {isSendingMessage && (
                   <div className="flex justify-start">
-                    <Ellipsis size={24} className="animate-spin" />
+                    <Ellipsis size={24} className="animate-pulse" />
                   </div>
                 )}
               </div>

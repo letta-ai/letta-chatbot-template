@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { getAgentMessagesQueryKey } from './use-agent-messages';
-import { AppMessage } from '../../types';
+import { AppMessage, MESSAGE_TYPE } from '../../types';
 import * as Letta from '@letta-ai/letta-client/api';
+import { getMessageId } from '@/lib/utils';
 
 export interface UseSendMessageType {
     agentId: string,
@@ -31,7 +32,7 @@ export function useSendMessage() {
                             id: 'new_' + Date.now(),
                             date: Date.now(),
                             message: text,
-                            messageType: 'user_message',
+                            messageType: MESSAGE_TYPE.USER_MESSAGE,
                         },
                     ];
                 },
@@ -56,33 +57,56 @@ export function useSendMessage() {
 
                             const data = _data.filter((message) => message.id !== 'deleteme_');
 
-                            const existingMessage = data.find((message) => message.id === response?.id);
 
-                            if (response.messageType !== 'assistant_message') {
-                                return data;
+                            const existingMessage = data.find((message) => message.id === getId(response));
+
+                            if (response.messageType === MESSAGE_TYPE.ASSISTANT_MESSAGE) {
+                                if (existingMessage) {
+                                    return data.map((message) => {
+                                        if (message.id === getMessageId(response)) {
+                                            return {
+                                                id: getMessageId(response),
+                                                date: new Date(response.date).getTime(),
+                                                messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
+                                                message: `${existingMessage.message || ''}${response.content || ''}`,
+                                            };
+                                        }
+                                        return message;
+                                    });
+                                }
+
+                                return [...data, {
+                                    id: getMessageId(response),
+                                    date: new Date(response.date).getTime(),
+                                    messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
+                                    message: typeof response.content === 'string' ? response.content : response.content?.text || '',
+                                }];
                             }
 
-                            if (existingMessage) {
-                                return data.map((message) => {
-                                    if (message.id === response.id) {
-                                        return {
-                                            id: response.id,
-                                            date: new Date(response.date).getTime(),
-                                            messageType: response.messageType,
-                                            message: `${existingMessage.message || ''}${response.content || ''}`,
-                                        };
-                                    }
+                            if (response.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
+                                if (existingMessage) {
+                                    return data.map((message) => {
+                                        if (message.id === getMessageId(response)) {
+                                            return {
+                                                id: getMessageId(response),
+                                                date: new Date(response.date).getTime(),
+                                                messageType: MESSAGE_TYPE.REASONING_MESSAGE,
+                                                message: `${existingMessage.message || ''}${response.reasoning || ''}`,
+                                            };
+                                        }
+                                        return message;
+                                    });
+                                }
 
-                                    return message;
-                                });
+                                return [...data, {
+                                    id: getMessageId(response),
+                                    date: new Date(response.date).getTime(),
+                                    messageType: MESSAGE_TYPE.REASONING_MESSAGE,
+                                    message: response.reasoning || '',
+                                }];
                             }
 
-                            return [...data, {
-                                id: response.id,
-                                date: new Date(response.date).getTime(),
-                                messageType: response.messageType,
-                                message: typeof response.content === 'string' ? response.content : response.content?.text || '',
-                            }];
+                            return data;
                         },
                     );
                 },

@@ -1,3 +1,4 @@
+import { getMessageId } from '@/lib/utils';
 import { AppMessage, MESSAGE_TYPE } from '@/types';
 import * as Letta from '@letta-ai/letta-client/api';
 
@@ -28,7 +29,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
     }
 
     return {
-      id: 'user_' + item.id,
+      id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: message,
       messageType: MESSAGE_TYPE.USER_MESSAGE,
@@ -38,7 +39,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
   if (messageType === MESSAGE_TYPE.TOOL_CALL_MESSAGE) {
     const extractedMessage = tryParseAssistantExtractedMessage(item.toolCall.arguments || '');
     return {
-      id: 'tool_call_' + item.id,
+      id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: extractedMessage || '',
       messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
@@ -47,7 +48,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
 
   if (messageType === MESSAGE_TYPE.ASSISTANT_MESSAGE) {
     return {
-      id: 'assistant_' + item.id,
+      id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: item.content || '',
       messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
@@ -56,7 +57,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
 
   if (messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
     return {
-      id: 'reasoning_' + item.id,
+      id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: item.reasoning || '',
       messageType: MESSAGE_TYPE.REASONING_MESSAGE,

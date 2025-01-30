@@ -58,7 +58,7 @@ export function useSendMessage() {
                             const data = _data.filter((message) => message.id !== 'deleteme_');
 
 
-                            const existingMessage = data.find((message) => message.id === getId(response));
+                            const existingMessage = data.find((message) => message.id === getMessageId(response));
 
                             if (response.messageType === MESSAGE_TYPE.ASSISTANT_MESSAGE) {
                                 if (existingMessage) {

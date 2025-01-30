@@ -10,7 +10,7 @@ import { AgentState } from '@letta-ai/letta-client/api';
 
 export function AppSidebar({ agents }: { agents: AgentState[] }) {
   return (
-    <SidebarContent id='agents-list'>
+    <SidebarContent id="agents-list">
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu className="cursor-pointer">

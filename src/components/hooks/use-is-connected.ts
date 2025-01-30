@@ -1,6 +1,6 @@
-import { useAgents } from "./use-agents"
+import { useAgents } from './use-agents';
 
 export function useIsConnected() {
-    const { isError, data } = useAgents()
-    return !isError
+  const { isError, data } = useAgents();
+  return !isError;
 }

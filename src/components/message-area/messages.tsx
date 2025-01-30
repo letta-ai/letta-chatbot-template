@@ -7,7 +7,7 @@ import { MessagePopover } from './message-popover';
 import { DEFAULT_BOT_MESSAGE, ERROR_CONNECTING } from '@/app/lib/labels';
 import { useIsConnected } from '../hooks/use-is-connected';
 import { useAgents } from '../hooks/use-agents';
-import { UseSendMessageType } from "@/components/hooks/use-send-message";
+import { UseSendMessageType } from '@/components/hooks/use-send-message';
 import { MESSAGE_TYPE } from '@/types';
 import { ReasoningMessageBlock } from '@/components/ui/reasoning-message';
 import { useReasoningMessage } from '@/components/toggle-reasoning-messages';
@@ -22,10 +22,10 @@ export const Messages = (props: MessagesProps) => {
   const { agentId } = useAgentContext();
   const { isEnabled } = useReasoningMessage();
   const { data: messages, isLoading } = useAgentMessages(agentId);
-  const { data: agents } = useAgents()
+  const { data: agents } = useAgents();
 
   const messagesListRef = useRef<HTMLDivElement>(null);
-  const isConnected = useIsConnected()
+  const isConnected = useIsConnected();
 
   const mounted = useRef(false);
 
@@ -45,7 +45,10 @@ export const Messages = (props: MessagesProps) => {
     if (messagesListRef.current) {
       // only scroll to the bottom is user is 100px away from the bottom
       const boundary = 100;
-      const bottom = messagesListRef.current.scrollHeight - messagesListRef.current.clientHeight - boundary;
+      const bottom =
+        messagesListRef.current.scrollHeight -
+        messagesListRef.current.clientHeight -
+        boundary;
 
       if (messagesListRef.current.scrollTop >= bottom || isSendingMessage) {
         messagesListRef.current.scrollTo(0, messagesListRef.current.scrollHeight);
@@ -53,20 +56,29 @@ export const Messages = (props: MessagesProps) => {
     }
   }, [messages, isSendingMessage]);
 
-
   return (
     <div ref={messagesListRef} className="flex-1 overflow-auto">
       <div className="group/message mx-auto w-full max-w-3xl px-4 h-full">
         <div className="flex h-full">
           {messages ? (
-            messages.length === 1 &&
-              messages[0].message === DEFAULT_BOT_MESSAGE ? (
+            messages.length === 1 && messages[0].message === DEFAULT_BOT_MESSAGE ? (
               <MessagePopover sendMessage={sendMessage} key={messages[0].id} />
             ) : (
               <div className="flex min-w-0 flex-1 flex-col gap-6 pt-4">
                 {messages.map((message) => {
-                  if ([MESSAGE_TYPE.REASONING_MESSAGE, MESSAGE_TYPE.TOOL_CALL_MESSAGE].includes(message.messageType)) {
-                    return <ReasoningMessageBlock key={message.id} message={message.message} isEnabled={isEnabled} />
+                  if (
+                    [
+                      MESSAGE_TYPE.REASONING_MESSAGE,
+                      MESSAGE_TYPE.TOOL_CALL_MESSAGE,
+                    ].includes(message.messageType)
+                  ) {
+                    return (
+                      <ReasoningMessageBlock
+                        key={message.id}
+                        message={message.message}
+                        isEnabled={isEnabled}
+                      />
+                    );
                   } else {
                     return (
                       <MessagePill
@@ -74,7 +86,7 @@ export const Messages = (props: MessagesProps) => {
                         message={message.message}
                         sender={message.messageType}
                       />
-                    )
+                    );
                   }
                 })}
                 {isSendingMessage && (

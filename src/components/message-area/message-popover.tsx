@@ -4,7 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { UseSendMessageType } from '../hooks/use-send-message';
 import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 import { MESSAGE_POPOVER_DESCRIPTION, suggestedChatActions } from '@/app/lib/labels';
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown';
 
 interface MessagePopoverProps {
   sendMessage: (options: UseSendMessageType) => void;
@@ -19,9 +19,7 @@ export const MessagePopover = (props: MessagePopoverProps) => {
     <div className="flex flex-col items-center h-full justify-between">
       <div className="flex top-component pt-20">
         <p className="text-center">
-          <Markdown>
-            {MESSAGE_POPOVER_DESCRIPTION}
-          </Markdown>
+          <Markdown>{MESSAGE_POPOVER_DESCRIPTION}</Markdown>
         </p>
       </div>
       <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-2 w-full`}>

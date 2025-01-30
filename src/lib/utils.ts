@@ -12,4 +12,4 @@ export const getMessageId = (message: Letta.agents.LettaStreamingResponse) => {
   }
 
   return message.messageType + message.id;
-}
+};

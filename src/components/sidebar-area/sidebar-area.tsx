@@ -15,13 +15,12 @@ import { TooltipTrigger } from '../ui/tooltip';
 import { TooltipContent } from '../ui/tooltip';
 import { TooltipProvider } from '../ui/tooltip';
 
-
 export function SidebarArea() {
   const { agentId, setAgentId } = useAgentContext();
   const queryClient = useQueryClient();
   const { mutate: createAgent, isPending } = useCreateAgent();
   const { data, isLoading } = useAgents();
-  const isConnected = useIsConnected()
+  const isConnected = useIsConnected();
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list');
@@ -45,24 +44,28 @@ export function SidebarArea() {
           },
         );
         setAgentId(data.id);
-        scrollSidebarToTop()
+        scrollSidebarToTop();
       },
     });
-  }
+  };
 
   useEffect(() => {
     if (data && data.length === 0) {
-      handleCreateAgent()
+      handleCreateAgent();
     }
-  }, [data])
+  }, [data]);
 
   const hostname = useMemo(() => {
     if (typeof window !== 'undefined') {
-      return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '0.0.0.0' ? 'LOCAL SERVER' : 'REMOTE SERVER';
+      return window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '0.0.0.0'
+        ? 'LOCAL SERVER'
+        : 'REMOTE SERVER';
     }
 
     return 'LOCAL SERVER';
-  }, [])
+  }, []);
 
   return (
     <Sidebar className="mt-1">
@@ -73,7 +76,7 @@ export function SidebarArea() {
               <div
                 className="flex items-center w-full"
                 onClick={() => {
-                  scrollSidebarToCurrentAgent()
+                  scrollSidebarToCurrentAgent();
                 }}
               >
                 <StatusCircle isConnected={isConnected} isLoading={isLoading} />
@@ -84,14 +87,13 @@ export function SidebarArea() {
               </TooltipContent>
             </TooltipTrigger>
           </Tooltip>
-
         </div>
         <div className="flex justify-end p-2">
           <Button
             disabled={isPending}
             type="button"
             onClick={() => {
-              handleCreateAgent()
+              handleCreateAgent();
             }}
             className="inline-flex size-3 h-fit items-center justify-center whitespace-nowrap bg-transparent font-medium text-primary shadow-none ring-offset-background transition-colors hover:hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           >

@@ -34,9 +34,7 @@ export default function RootLayout({
           <SidebarProvider>
             <AgentDetailsProvider>
               <ReasoningMessageProvider>
-                <ContentLayout>
-                  {children}
-                </ContentLayout>
+                <ContentLayout>{children}</ContentLayout>
               </ReasoningMessageProvider>
             </AgentDetailsProvider>
           </SidebarProvider>

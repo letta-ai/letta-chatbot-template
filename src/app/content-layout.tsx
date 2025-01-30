@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { useAgents } from '@/components/hooks/use-agents';
 import { useParams } from 'next/navigation';
 
-
 export default function ContentLayout({ children }: { children: React.ReactNode }) {
   const params = useParams();
   const { agentId: agentIdFromParams } = params;

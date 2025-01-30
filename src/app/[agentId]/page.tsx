@@ -11,7 +11,7 @@ export default function Home() {
   const { isOpen } = useAgentDetails();
   const isMobile = useIsMobile();
 
-  const { isPending, mutate: sendMessage } = useSendMessage()
+  const { isPending, mutate: sendMessage } = useSendMessage();
 
   return (
     <div className="flex flex-row flex-1 h-0">

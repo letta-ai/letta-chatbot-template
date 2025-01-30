@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const getAgentMessagesQueryKey = (agentId: string) => [
   'agentMessages',
-  agentId,
+  agentId
 ]
 
 export function useAgentMessages(agentId: string) {
@@ -16,6 +16,6 @@ export function useAgentMessages(agentId: string) {
       }
       return response.json()
     },
-    enabled: !!agentId,
+    enabled: !!agentId
   })
 }

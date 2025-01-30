@@ -11,7 +11,7 @@ async function getAgentMessages(
   try {
     const { agentId } = await params
     const messages = await client.agents.messages.list(agentId, {
-      limit: 100,
+      limit: 100
     })
 
     const result = filterMessages(messages as Letta.LettaMessageUnion[])
@@ -40,9 +40,9 @@ async function sendMessage(
           messages: [
             {
               role,
-              content: text,
-            },
-          ],
+              content: text
+            }
+          ]
         })
 
         for await (const message of response) {
@@ -56,14 +56,14 @@ async function sendMessage(
         req.signal.addEventListener('abort', () => {
           controller.close()
         })
-      },
+      }
     }),
     {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
-        Connection: 'keep-alive',
-      },
+        Connection: 'keep-alive'
+      }
     }
   )
 }

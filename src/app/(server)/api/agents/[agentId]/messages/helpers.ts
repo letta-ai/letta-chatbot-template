@@ -33,7 +33,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: message,
-      messageType: MESSAGE_TYPE.USER_MESSAGE,
+      messageType: MESSAGE_TYPE.USER_MESSAGE
     }
   }
 
@@ -45,7 +45,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: extractedMessage || '',
-      messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
+      messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE
     }
   }
 
@@ -54,7 +54,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: item.content || '',
-      messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
+      messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE
     }
   }
 
@@ -63,7 +63,7 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       id: getMessageId(item),
       date: new Date(item.date).getTime(),
       message: item.reasoning || '',
-      messageType: MESSAGE_TYPE.REASONING_MESSAGE,
+      messageType: MESSAGE_TYPE.REASONING_MESSAGE
     }
   }
 

@@ -8,7 +8,7 @@ interface ReasoningMessageProps {
 
 const ReasoningMessageBlock: React.FC<ReasoningMessageProps> = ({
   message,
-  isEnabled,
+  isEnabled
 }) => {
   return (
     <div

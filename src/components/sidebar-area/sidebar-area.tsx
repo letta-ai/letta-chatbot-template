@@ -45,7 +45,7 @@ export function SidebarArea() {
         )
         setAgentId(data.id)
         scrollSidebarToTop()
-      },
+      }
     })
   }
 

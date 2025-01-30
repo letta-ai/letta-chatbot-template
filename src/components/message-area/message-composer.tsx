@@ -7,7 +7,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { useRef } from 'react'
@@ -28,7 +28,7 @@ export function MessageComposer(props: MessageComposerProps) {
   const parentRef = useRef<HTMLDivElement>(null)
 
   const form = useForm({
-    defaultValues: { message: '' },
+    defaultValues: { message: '' }
   })
   async function onSubmit(data: { message: string }) {
     if (isSendingMessage) {

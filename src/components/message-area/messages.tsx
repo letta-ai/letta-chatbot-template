@@ -73,7 +73,7 @@ export const Messages = (props: MessagesProps) => {
                   if (
                     [
                       MESSAGE_TYPE.REASONING_MESSAGE,
-                      MESSAGE_TYPE.TOOL_CALL_MESSAGE,
+                      MESSAGE_TYPE.TOOL_CALL_MESSAGE
                     ].includes(message.messageType)
                   ) {
                     return (

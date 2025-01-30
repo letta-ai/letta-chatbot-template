@@ -6,9 +6,9 @@ export function useCreateAgent() {
       return fetch('/api/agents', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }).then((response) => response.json())
-    },
+    }
   })
 }

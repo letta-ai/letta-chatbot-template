@@ -7,7 +7,7 @@ interface SkeletonLoadBlockProps {
 
 export const SkeletonLoadBlock: React.FC<SkeletonLoadBlockProps> = ({
   className,
-  accent = 200,
+  accent = 200
 }) => {
   return (
     <div

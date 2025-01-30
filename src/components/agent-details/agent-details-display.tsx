@@ -25,12 +25,12 @@ function AgentDetailDisplayContent() {
       {[
         {
           title: 'CORE MEMORY',
-          component: <AgentCoreMemoryBlock />,
+          component: <AgentCoreMemoryBlock />
         },
         {
           title: 'ARCHIVAL MEMORY',
-          component: <AgentArchivalMemory />,
-        },
+          component: <AgentArchivalMemory />
+        }
       ].map((section, index) => (
         <section key={index} className='pb-4'>
           <header className='text-[0.75rem] font-bold py-4'>

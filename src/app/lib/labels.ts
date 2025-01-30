@@ -7,23 +7,23 @@ export const suggestedChatActions = [
   {
     title: 'What is Letta?',
     description: 'Card Description',
-    action: 'What is Letta?',
+    action: 'What is Letta?'
   },
   {
     title: 'Lorum ipsum',
     description: 'Card Description',
-    action: 'Lorum ipsum',
+    action: 'Lorum ipsum'
   },
   {
     title: 'Lorum ipsum 2',
     description: 'Card Description',
-    action: 'Lorum ipsum 2',
+    action: 'Lorum ipsum 2'
   },
   {
     title: 'Lorum ipsum 3',
     description: 'Card Description',
-    action: 'Lorum ipsum 3',
-  },
+    action: 'Lorum ipsum 3'
+  }
 ]
 
 export const TEXTBOX_PLACEHOLDER = 'Send a message...'

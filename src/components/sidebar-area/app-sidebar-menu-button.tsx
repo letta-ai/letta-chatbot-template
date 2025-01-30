@@ -1,7 +1,7 @@
 import {
   SidebarMenuButton,
   useSidebar,
-  SidebarMenuItem,
+  SidebarMenuItem
 } from '@/components/ui/sidebar'
 import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 import { useIsMobile } from '@/components/hooks/use-mobile'

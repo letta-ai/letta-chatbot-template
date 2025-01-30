@@ -14,6 +14,6 @@ export function useAgents() {
           throw new Error()
         }
         return res.json()
-      }),
+      })
   })
 }

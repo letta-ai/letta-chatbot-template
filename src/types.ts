@@ -11,5 +11,5 @@ export enum MESSAGE_TYPE {
   USER_MESSAGE = 'user_message',
   ASSISTANT_MESSAGE = 'assistant_message',
   TOOL_CALL_MESSAGE = 'tool_call_message',
-  REASONING_MESSAGE = 'reasoning_message',
+  REASONING_MESSAGE = 'reasoning_message'
 }

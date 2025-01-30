@@ -15,7 +15,7 @@ if (!BASE_URL) {
 
 const client = new LettaClient({
   token: LETTA_TOKEN,
-  baseUrl: BASE_URL,
+  baseUrl: BASE_URL
 })
 
 export default client

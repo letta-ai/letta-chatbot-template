@@ -19,7 +19,7 @@ export function useSendMessage() {
     try {
       queryClient.setQueriesData<AppMessage[]>(
         {
-          queryKey: getAgentMessagesQueryKey(agentId),
+          queryKey: getAgentMessagesQueryKey(agentId)
         },
         (data) => {
           if (!data) {
@@ -32,8 +32,8 @@ export function useSendMessage() {
               id: 'new_' + Date.now(),
               date: Date.now(),
               message: text,
-              messageType: MESSAGE_TYPE.USER_MESSAGE,
-            },
+              messageType: MESSAGE_TYPE.USER_MESSAGE
+            }
           ]
         }
       )
@@ -41,7 +41,7 @@ export function useSendMessage() {
       await fetchEventSource(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ role: 'user', text }),
         onmessage: (message) => {
@@ -50,7 +50,7 @@ export function useSendMessage() {
           ) as Letta.agents.LettaStreamingResponse
           queryClient.setQueriesData<AppMessage[] | undefined>(
             {
-              queryKey: getAgentMessagesQueryKey(agentId),
+              queryKey: getAgentMessagesQueryKey(agentId)
             },
             (_data) => {
               if (!_data) {
@@ -71,7 +71,7 @@ export function useSendMessage() {
                         id: getMessageId(response),
                         date: new Date(response.date).getTime(),
                         messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
-                        message: `${existingMessage.message || ''}${response.content || ''}`,
+                        message: `${existingMessage.message || ''}${response.content || ''}`
                       }
                     }
                     return message
@@ -87,8 +87,8 @@ export function useSendMessage() {
                     message:
                       typeof response.content === 'string'
                         ? response.content
-                        : response.content?.text || '',
-                  },
+                        : response.content?.text || ''
+                  }
                 ]
               }
 
@@ -100,7 +100,7 @@ export function useSendMessage() {
                         id: getMessageId(response),
                         date: new Date(response.date).getTime(),
                         messageType: MESSAGE_TYPE.REASONING_MESSAGE,
-                        message: `${existingMessage.message || ''}${response.reasoning || ''}`,
+                        message: `${existingMessage.message || ''}${response.reasoning || ''}`
                       }
                     }
                     return message
@@ -113,21 +113,21 @@ export function useSendMessage() {
                     id: getMessageId(response),
                     date: new Date(response.date).getTime(),
                     messageType: MESSAGE_TYPE.REASONING_MESSAGE,
-                    message: response.reasoning || '',
-                  },
+                    message: response.reasoning || ''
+                  }
                 ]
               }
 
               return data
             }
           )
-        },
+        }
       })
     } catch (error) {
       console.error('Error sending message:', error)
     }
   }
   return useMutation<void, undefined, UseSendMessageType>({
-    mutationFn: (options) => sendMessage(options),
+    mutationFn: (options) => sendMessage(options)
   })
 }

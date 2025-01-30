@@ -7,7 +7,7 @@ interface StatusCircleProps {
 
 const StatusCircle: React.FC<StatusCircleProps> = ({
   isConnected,
-  isLoading,
+  isLoading
 }) => {
   return (
     <div

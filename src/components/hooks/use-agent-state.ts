@@ -9,6 +9,6 @@ export function useAgentState(agentId: string) {
     queryKey: getUseAgentStateKey(agentId),
     queryFn: () => fetch(`/api/agents/${agentId}`).then((res) => res.json()),
     refetchInterval: 3000,
-    enabled: !!agentId,
+    enabled: !!agentId
   })
 }

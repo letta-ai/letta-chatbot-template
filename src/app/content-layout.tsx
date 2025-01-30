@@ -9,7 +9,7 @@ import { useAgents } from '@/components/hooks/use-agents'
 import { useParams } from 'next/navigation'
 
 export default function ContentLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {

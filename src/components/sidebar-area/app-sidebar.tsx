@@ -3,7 +3,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
-  SidebarMenuItem,
+  SidebarMenuItem
 } from '@/components/ui/sidebar'
 import { AppSidebarMenuButton } from './app-sidebar-menu-button'
 import { AgentState } from '@letta-ai/letta-client/api'

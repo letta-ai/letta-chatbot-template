@@ -5,7 +5,7 @@ import { UseSendMessageType } from '../hooks/use-send-message'
 import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 import {
   MESSAGE_POPOVER_DESCRIPTION,
-  suggestedChatActions,
+  suggestedChatActions
 } from '@/app/lib/labels'
 import Markdown from 'react-markdown'
 
@@ -36,7 +36,7 @@ export const MessagePopover = (props: MessagePopoverProps) => {
               onClick={() => {
                 sendMessage({
                   agentId: agentId,
-                  text: card.action,
+                  text: card.action
                 })
               }}
               className='cursor-pointer shadow-none hover:bg-accent transition-shadow duration-300'

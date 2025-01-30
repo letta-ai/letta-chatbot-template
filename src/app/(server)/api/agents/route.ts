@@ -31,7 +31,7 @@ async function createAgent(req: NextApiRequest) {
     const newAgent = await client.agents.create({
       memoryBlocks: DEFAULT_MEMORY_BLOCKS,
       model: DEFAULT_LLM,
-      embedding: DEFAULT_EMBEDDING,
+      embedding: DEFAULT_EMBEDDING
     })
 
     return NextResponse.json(newAgent)

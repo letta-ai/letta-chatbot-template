@@ -18,7 +18,6 @@ export default function ContentLayout({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     if (data && data.length > 0 && !ref.current) {
-      console.log('data', data);
       setAgentId(data[0].id);
       ref.current = true;
     }

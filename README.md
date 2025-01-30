@@ -7,7 +7,7 @@
 </p>
 
 <div align="center">
-  <h1>Letta Demo Chat App</h1>
+  <h1>Letta Chatbot Template</h1>
 </div>
 
 Deploy your own AI chatbot built with [Letta](https://www.letta.com/).
@@ -21,14 +21,13 @@ Deploy your own AI chatbot built with [Letta](https://www.letta.com/).
 - [React](https://reactjs.org)
   - React is used for building dynamic UIs with reusable components, making the chat app interactive and responsive.
 - [Shadcn UI](https://ui.shadcn.com)
-  - Shadcn UI is a library of components for building consistent and modern UI with [Tailwind CSS](https://tailwindcss.com). It includes [Lucide icons](https://lucide.dev) for a wide range of use cases.
-- [Auth]
+  - Shadcn UI is a library of components for building consistent and modern UI with [Tailwind CSS](https://tailwindcss.com). It includes [Lucide icons](https://lucide.dev) for convenient use.
 
 ---
 
-# 🔰 Getting Started
+# ⚡️ Quickstart
 
-### 📋 Prerequisites
+### 📋 What you need
 
 - [Node.js](https://nodejs.org/en/download/)
 - [npm](https://www.npmjs.com/get-npm)

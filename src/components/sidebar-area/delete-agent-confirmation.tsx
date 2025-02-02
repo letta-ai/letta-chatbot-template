@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useDialogDetails } from '@/components/ui/agent-dialog';
 import { useAgentState } from '../hooks/use-agent-state';
-import { useQueryClient } from '@tanstack/react-query';
 
 const DeleteAgentConfirmation: React.FC<{ agentId: string, handleDelete: () => void }> = ({ agentId, handleDelete }) => {
     const { setIsOpen } = useDialogDetails();

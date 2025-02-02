@@ -12,8 +12,7 @@ import OptionsMenu from './options-menu'
 
 export const AppSidebarMenuButton: React.FC<{
   agent: AgentState
-  setOpenEditAgent: (open: boolean) => void
-}> = ({ agent, setOpenEditAgent }) => {
+}> = ({ agent }) => {
   const { data } = useAgentMessages(agent.id)
   const isMobile = useIsMobile()
   const { toggleSidebar } = useSidebar()
@@ -50,7 +49,7 @@ export const AppSidebarMenuButton: React.FC<{
               )}
             </span>
           </div>
-          <OptionsMenu agentId={agent.id} setOpenEditAgent={setOpenEditAgent} />
+          <OptionsMenu agentId={agent.id} />
         </div>
       </SidebarMenuButton>
     </div>

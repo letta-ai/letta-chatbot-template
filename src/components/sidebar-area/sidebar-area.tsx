@@ -11,7 +11,10 @@ import { useIsConnected } from '../hooks/use-is-connected'
 import { useEffect, useMemo, useState } from 'react'
 import { AgentState } from '@letta-ai/letta-client/api'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
-import EditAgentDialog from './edit-agent-dialog'
+import EditAgentForm from './edit-agent-form'
+import AgentDialog from './dialog'
+import { useDialogDetails } from './dialog-context'
+
 
 export function SidebarArea() {
   const queryClient = useQueryClient()
@@ -20,8 +23,7 @@ export function SidebarArea() {
   const { data, isLoading } = useAgents()
   const isConnected = useIsConnected()
 
-  const [openEditAgent, setOpenEditAgent] = useState(false);
-
+  const { isOpen, setIsOpen } = useDialogDetails()
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list')
@@ -106,8 +108,10 @@ export function SidebarArea() {
           </Button>
         </div>
       </div>
-      {data && data.length > 0 && <AppSidebar agents={data} setOpenEditAgent={setOpenEditAgent} />}
-      {openEditAgent && <EditAgentDialog agentId={agentId} setOpenEditAgent={setOpenEditAgent} />}
+
+      {data && data.length > 0 && <AppSidebar agents={data} />}
+      {isOpen && <AgentDialog title='Edit Agent' content={<EditAgentForm agentId={agentId} />} />}
+
     </Sidebar>
   )
 }

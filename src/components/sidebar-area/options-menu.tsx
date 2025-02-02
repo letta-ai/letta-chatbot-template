@@ -7,9 +7,13 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useDialogDetails } from './dialog-context';
 
 
-const OptionsMenu: React.FC<{ agentId: string, setOpenEditAgent: (open: boolean) => void }> = ({ agentId, setOpenEditAgent }) => {
+const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
+
+	const { setIsOpen } = useDialogDetails()
+
 	return (
 		<div className='flex rounded-full'>
 			<Tooltip>
@@ -17,16 +21,12 @@ const OptionsMenu: React.FC<{ agentId: string, setOpenEditAgent: (open: boolean)
 					<DropdownMenu>
 						<DropdownMenuTrigger><Ellipsis size={16} /></DropdownMenuTrigger>
 						<DropdownMenuContent className="flex flex-col gap-1 p-3">
-
 							<DropdownMenuItem
 								id={`edit-agent-${agentId}`}
 								onClick={() => {
-									console.log('Edit Agent')
-									setOpenEditAgent(true)
+									setIsOpen(true)
 								}}>
-
 								<PenBox size={16} />Edit Agent
-
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								id={`delete-agent-${agentId}`}
@@ -38,7 +38,6 @@ const OptionsMenu: React.FC<{ agentId: string, setOpenEditAgent: (open: boolean)
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
-
 					<TooltipContent>
 						<span>Options</span>
 					</TooltipContent>

@@ -15,7 +15,7 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
 	const { setDialogType, setIsOpen } = useDialogDetails()
 
 	return (
-		<div className='flex rounded-full'>
+		<div className='flex'>
 			<Tooltip>
 				<TooltipTrigger>
 					<DropdownMenu>

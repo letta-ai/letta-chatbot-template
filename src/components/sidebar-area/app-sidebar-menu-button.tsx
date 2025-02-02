@@ -34,7 +34,7 @@ export const AppSidebarMenuButton: React.FC<{
           setAgentId(agent.id)
         }}
       >
-        <div className='flex group'>
+        <div className='flex group justify-between'>
           <div className='overflow-hidden flex-col'>
             <span className='block w-full truncate text-primary'>
               {agent.name}

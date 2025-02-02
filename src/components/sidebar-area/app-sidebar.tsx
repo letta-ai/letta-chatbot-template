@@ -8,7 +8,7 @@ import {
 import { AppSidebarMenuButton } from './app-sidebar-menu-button'
 import { AgentState } from '@letta-ai/letta-client/api'
 
-export function AppSidebar({ agents }: { agents: AgentState[] }) {
+export function AppSidebar({ agents, setOpenEditAgent }: { agents: AgentState[], setOpenEditAgent: (open: boolean) => void }) {
   return (
     <SidebarContent id='agents-list'>
       <SidebarGroup>
@@ -17,7 +17,7 @@ export function AppSidebar({ agents }: { agents: AgentState[] }) {
             {agents &&
               agents.map((agent) => (
                 <SidebarMenuItem key={agent.id}>
-                  <AppSidebarMenuButton agent={agent} />
+                  <AppSidebarMenuButton agent={agent} setOpenEditAgent={setOpenEditAgent} />
                 </SidebarMenuItem>
               ))}
           </SidebarMenu>

@@ -1,26 +1,27 @@
 import { Button } from '@/components/ui/button'
 import { LoaderCircle, PlusIcon } from 'lucide-react'
 import { AppSidebar } from '@/components/sidebar-area/app-sidebar'
-import { Sidebar } from '../ui/sidebar'
+import { Sidebar } from '@/components/ui/sidebar'
 import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 import { useCreateAgent } from '../hooks/use-create-agent'
 import { useQueryClient } from '@tanstack/react-query'
 import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents'
 import { StatusCircle } from '../ui/status-circle'
 import { useIsConnected } from '../hooks/use-is-connected'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AgentState } from '@letta-ai/letta-client/api'
-import { Tooltip } from '../ui/tooltip'
-import { TooltipTrigger } from '../ui/tooltip'
-import { TooltipContent } from '../ui/tooltip'
-import { TooltipProvider } from '../ui/tooltip'
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+import EditAgentDialog from './edit-agent-dialog'
 
 export function SidebarArea() {
-  const { agentId, setAgentId } = useAgentContext()
   const queryClient = useQueryClient()
+  const { agentId, setAgentId } = useAgentContext()
   const { mutate: createAgent, isPending } = useCreateAgent()
   const { data, isLoading } = useAgents()
   const isConnected = useIsConnected()
+
+  const [openEditAgent, setOpenEditAgent] = useState(false);
+
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list')
@@ -105,7 +106,8 @@ export function SidebarArea() {
           </Button>
         </div>
       </div>
-      {data && data.length > 0 && <AppSidebar agents={data} />}
+      {data && data.length > 0 && <AppSidebar agents={data} setOpenEditAgent={setOpenEditAgent} />}
+      {openEditAgent && <EditAgentDialog agentId={agentId} setOpenEditAgent={setOpenEditAgent} />}
     </Sidebar>
   )
 }

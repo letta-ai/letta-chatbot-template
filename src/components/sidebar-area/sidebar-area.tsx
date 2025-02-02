@@ -61,7 +61,12 @@ export function SidebarArea() {
         queryClient.setQueriesData(
           { queryKey: USE_AGENTS_KEY },
           (oldData: AgentState[]) => {
-            return [...oldData.filter(agent => agent.id !== agentId)]
+            const updatedData = [...oldData.filter(agent => agent.id !== agentId)]
+            if (updatedData.length > 0) {
+              setAgentId(updatedData[0].id)
+              scrollSidebarToTop()
+            }
+            return updatedData
           }
         )
         setIsOpen(false);

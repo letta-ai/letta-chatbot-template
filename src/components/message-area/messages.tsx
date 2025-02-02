@@ -20,8 +20,8 @@ interface MessagesProps {
 export const Messages = (props: MessagesProps) => {
   const { isSendingMessage, sendMessage } = props
   const { agentId } = useAgentContext()
-  const { isEnabled } = useReasoningMessage()
   const { data: messages, isLoading } = useAgentMessages(agentId)
+  const { isEnabled } = useReasoningMessage()
   const { data: agents } = useAgents()
 
   const messagesListRef = useRef<HTMLDivElement>(null)
@@ -65,7 +65,7 @@ export const Messages = (props: MessagesProps) => {
         <div className='flex h-full'>
           {messages ? (
             messages.length === 1 &&
-            messages[0].message === DEFAULT_BOT_MESSAGE ? (
+              messages[0].message === DEFAULT_BOT_MESSAGE ? (
               <MessagePopover sendMessage={sendMessage} key={messages[0].id} />
             ) : (
               <div className='flex min-w-0 flex-1 flex-col gap-6 pt-4'>

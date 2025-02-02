@@ -7,12 +7,12 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useDialogDetails } from './dialog-context';
+import { DialogType, useDialogDetails } from './agent-dialog';
 
 
 const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
 
-	const { setIsOpen } = useDialogDetails()
+	const { setDialogType, setIsOpen } = useDialogDetails()
 
 	return (
 		<div className='flex rounded-full'>
@@ -24,6 +24,7 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
 							<DropdownMenuItem
 								id={`edit-agent-${agentId}`}
 								onClick={() => {
+									setDialogType(DialogType.EditAgent)
 									setIsOpen(true)
 								}}>
 								<PenBox size={16} />Edit Agent
@@ -32,6 +33,8 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
 								id={`delete-agent-${agentId}`}
 								className='text-red-500 hover:text-red-500 focus:text-red-500'
 								onClick={() => {
+									setDialogType(DialogType.DeleteAgent)
+									setIsOpen(true)
 									console.log('Delete Agent')
 								}}>
 								<Trash2Icon size={16} />Delete Agent

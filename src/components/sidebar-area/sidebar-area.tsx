@@ -8,12 +8,14 @@ import { useQueryClient } from '@tanstack/react-query'
 import { USE_AGENTS_KEY, useAgents } from '../hooks/use-agents'
 import { StatusCircle } from '../ui/status-circle'
 import { useIsConnected } from '../hooks/use-is-connected'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { AgentState } from '@letta-ai/letta-client/api'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import EditAgentForm from './edit-agent-form'
-import AgentDialog from './dialog'
-import { useDialogDetails } from './dialog-context'
+import AgentDialog from './agent-dialog'
+import { DialogType, useDialogDetails } from './agent-dialog'
+import DeleteAgentConfirmation from './delete-agent-confirmation'
+import { useDeleteAgent } from '../hooks/use-agent-state'
 
 
 export function SidebarArea() {
@@ -22,8 +24,9 @@ export function SidebarArea() {
   const { mutate: createAgent, isPending } = useCreateAgent()
   const { data, isLoading } = useAgents()
   const isConnected = useIsConnected()
+  const { mutate: deleteAgent } = useDeleteAgent()
 
-  const { isOpen, setIsOpen } = useDialogDetails()
+  const { isOpen, setIsOpen, dialogType } = useDialogDetails()
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list')
@@ -51,6 +54,20 @@ export function SidebarArea() {
       }
     })
   }
+
+  const handleDelete = () => {
+    deleteAgent(agentId, {
+      onSuccess: () => {
+        queryClient.setQueriesData(
+          { queryKey: USE_AGENTS_KEY },
+          (oldData: AgentState[]) => {
+            return [...oldData.filter(agent => agent.id !== agentId)]
+          }
+        )
+        setIsOpen(false);
+      }
+    });
+  };
 
   useEffect(() => {
     if (data && data.length === 0) {
@@ -110,7 +127,8 @@ export function SidebarArea() {
       </div>
 
       {data && data.length > 0 && <AppSidebar agents={data} />}
-      {isOpen && <AgentDialog title='Edit Agent' content={<EditAgentForm agentId={agentId} />} />}
+      {isOpen && dialogType === DialogType.EditAgent && <AgentDialog title='Edit Agent' content={<EditAgentForm agentId={agentId} />} />}
+      {isOpen && dialogType === DialogType.DeleteAgent && <AgentDialog title='Delete Agent' content={<DeleteAgentConfirmation agentId={agentId} handleDelete={handleDelete} />} />}
 
     </Sidebar>
   )

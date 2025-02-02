@@ -1,4 +1,5 @@
 'use client'
+
 import { Letta } from '@letta-ai/letta-client'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
@@ -22,6 +23,19 @@ export function useModifyAgent(agentId: string) {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify(newData),
+      }).then(response => response.json());
+    }
+  });
+}
+
+export function useDeleteAgent() {
+  return useMutation({
+    mutationFn: (agentId: string) => {
+      return fetch(`/api/agents/${agentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }).then(response => response.json());
     }
   });

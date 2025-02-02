@@ -41,5 +41,19 @@ async function modifyAgentById(req: NextRequest, { params }: { params: { agentId
   }
 }
 
+
+async function deleteAgentById(req: NextRequest, { params }: { params: { agentId: string } }) {
+  const { agentId } = await params
+  try {
+    await client.agents.delete(agentId)
+    return NextResponse.json({ message: 'Agent deleted successfully' })
+  } catch (error) {
+    console.error('Error deleting agent:', error)
+    return NextResponse.json({ error: 'Error deleting agent' }, { status: 500 })
+  }
+}
+
+
 export const GET = getAgentById
 export const PATCH = modifyAgentById
+export const DELETE = deleteAgentById

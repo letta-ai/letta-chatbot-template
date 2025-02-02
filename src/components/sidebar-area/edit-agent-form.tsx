@@ -16,7 +16,7 @@ import {
 import { AgentState } from '@letta-ai/letta-client/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY } from '../hooks/use-agents';
-import { useDialogDetails } from './dialog-context';
+import { useDialogDetails } from './agent-dialog';
 
 
 const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {

@@ -6,7 +6,7 @@ import { AgentDetailsProvider } from '@/components/ui/agent-details'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import ContentLayout from './content-layout'
 import { ReasoningMessageProvider } from '@/components/toggle-reasoning-messages'
-import { DialogContextProvider } from '@/components/sidebar-area/dialog-context'
+import { DialogContextProvider } from '@/components/sidebar-area/agent-dialog'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

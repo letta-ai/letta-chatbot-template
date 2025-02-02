@@ -36,7 +36,9 @@ export const AppSidebarMenuButton: React.FC<{
       >
         <div className='flex group'>
           <div className='overflow-hidden flex-col'>
-            <span className='block w-full truncate text-primary'>{agent.name}</span>
+            <span className='block w-full truncate text-primary'>
+              {agent.name}
+            </span>
             <span className='block w-full truncate text-muted-foreground'>
               {data ? (
                 data[data.length - 1].message === DEFAULT_BOT_MESSAGE ? (

@@ -12,8 +12,8 @@ import { useEffect, useMemo } from 'react'
 import { AgentState } from '@letta-ai/letta-client/api'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import EditAgentForm from './edit-agent-form'
-import AgentDialog from './agent-dialog'
-import { DialogType, useDialogDetails } from './agent-dialog'
+import { AgentDialog } from '../ui/agent-dialog'
+import { DialogType, useDialogDetails } from '../ui/agent-dialog'
 import DeleteAgentConfirmation from './delete-agent-confirmation'
 import { useDeleteAgent } from '../hooks/use-agent-state'
 
@@ -127,8 +127,16 @@ export function SidebarArea() {
       </div>
 
       {data && data.length > 0 && <AppSidebar agents={data} />}
-      {isOpen && dialogType === DialogType.EditAgent && <AgentDialog title='Edit Agent' content={<EditAgentForm agentId={agentId} />} />}
-      {isOpen && dialogType === DialogType.DeleteAgent && <AgentDialog title='Delete Agent' content={<DeleteAgentConfirmation agentId={agentId} handleDelete={handleDelete} />} />}
+      {isOpen && dialogType === DialogType.EditAgent &&
+        <AgentDialog title='Edit agent'
+          content={<EditAgentForm agentId={agentId} />}
+        />
+      }
+      {isOpen && dialogType === DialogType.DeleteAgent &&
+        <AgentDialog title='Delete agent?'
+          content={<DeleteAgentConfirmation agentId={agentId} handleDelete={handleDelete} />}
+        />
+      }
 
     </Sidebar>
   )

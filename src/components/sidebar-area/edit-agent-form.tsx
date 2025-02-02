@@ -16,7 +16,7 @@ import {
 import { AgentState } from '@letta-ai/letta-client/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { USE_AGENTS_KEY } from '../hooks/use-agents';
-import { useDialogDetails } from './agent-dialog';
+import { useDialogDetails } from '../ui/agent-dialog';
 
 
 const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
@@ -84,7 +84,7 @@ const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
 				/>
 				<div className="flex justify-end space-x-3">
 					<Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
-					<Button variant="default" type="submit">Submit</Button>
+					<Button variant="default" type="submit">Save</Button>
 				</div>
 			</form>
 		</Form>

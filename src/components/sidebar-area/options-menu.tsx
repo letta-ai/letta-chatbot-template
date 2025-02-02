@@ -7,7 +7,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { DialogType, useDialogDetails } from './agent-dialog';
+import { DialogType, useDialogDetails } from '../ui/agent-dialog';
 
 
 const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {

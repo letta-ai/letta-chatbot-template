@@ -3,6 +3,12 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createContext, useContext, useState } from "react"
+import { Button } from './button';
+import { AgentState } from '@letta-ai/letta-client/api';
+import { USE_AGENTS_KEY } from '../hooks/use-agents';
+import { useDeleteAgent } from '../hooks/use-agent-state';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAgentContext } from '@/app/[agentId]/context/agent-context';
 
 enum DialogType {
 	EditAgent = 'edit-agent',
@@ -43,8 +49,6 @@ function useDialogDetails() {
 	return context
 }
 
-export { DialogContextProvider, useDialogDetails, DialogType }
-
 const AgentDialog: React.FC<{ title: string, content: React.ReactNode }> = ({ title, content }) => {
 	return (
 		<Card
@@ -66,4 +70,7 @@ const AgentDialog: React.FC<{ title: string, content: React.ReactNode }> = ({ ti
 	)
 };
 
-export default AgentDialog;
+
+
+export { DialogContextProvider, useDialogDetails, DialogType, AgentDialog }
+

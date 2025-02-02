@@ -15,7 +15,7 @@ export default function ContentLayout({
 }) {
   const params = useParams()
   const { agentId: agentIdFromParams } = params
-  const { data, isLoading } = useAgents()
+  const { data } = useAgents()
   const { setAgentId } = useAgentContext()
   const ref = useRef(false)
 

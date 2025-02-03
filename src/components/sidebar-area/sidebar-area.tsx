@@ -10,13 +10,16 @@ import { StatusCircle } from '../ui/status-circle'
 import { useIsConnected } from '../hooks/use-is-connected'
 import { useEffect, useMemo } from 'react'
 import { AgentState } from '@letta-ai/letta-client/api'
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent
+} from '@/components/ui/tooltip'
 import EditAgentForm from './edit-agent-form'
 import { AgentDialog } from '../ui/agent-dialog'
 import { DialogType, useDialogDetails } from '../ui/agent-dialog'
 import DeleteAgentConfirmation from './delete-agent-confirmation'
 import { useDeleteAgent } from '../hooks/use-agent-state'
-
 
 export function SidebarArea() {
   const queryClient = useQueryClient()
@@ -61,7 +64,9 @@ export function SidebarArea() {
         queryClient.setQueriesData(
           { queryKey: USE_AGENTS_KEY },
           (oldData: AgentState[]) => {
-            const updatedData = [...oldData.filter(agent => agent.id !== agentId)]
+            const updatedData = [
+              ...oldData.filter((agent) => agent.id !== agentId)
+            ]
             if (updatedData.length > 0) {
               setAgentId(updatedData[0].id)
               scrollSidebarToTop()
@@ -69,10 +74,10 @@ export function SidebarArea() {
             return updatedData
           }
         )
-        setIsOpen(false);
+        setIsOpen(false)
       }
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     if (data && data.length === 0) {
@@ -132,17 +137,23 @@ export function SidebarArea() {
       </div>
 
       {data && data.length > 0 && <AppSidebar agents={data} />}
-      {isOpen && dialogType === DialogType.EditAgent &&
-        <AgentDialog title='Edit agent'
+      {isOpen && dialogType === DialogType.EditAgent && (
+        <AgentDialog
+          title='Edit agent'
           content={<EditAgentForm agentId={agentId} />}
         />
-      }
-      {isOpen && dialogType === DialogType.DeleteAgent &&
-        <AgentDialog title='Delete agent?'
-          content={<DeleteAgentConfirmation agentId={agentId} handleDelete={handleDelete} />}
+      )}
+      {isOpen && dialogType === DialogType.DeleteAgent && (
+        <AgentDialog
+          title='Delete agent?'
+          content={
+            <DeleteAgentConfirmation
+              agentId={agentId}
+              handleDelete={handleDelete}
+            />
+          }
         />
-      }
-
+      )}
     </Sidebar>
   )
 }

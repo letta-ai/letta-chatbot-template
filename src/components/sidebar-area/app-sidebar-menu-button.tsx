@@ -1,7 +1,4 @@
-import {
-  SidebarMenuButton,
-  useSidebar
-} from '@/components/ui/sidebar'
+import { SidebarMenuButton, useSidebar } from '@/components/ui/sidebar'
 import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 import { useIsMobile } from '@/components/hooks/use-mobile'
 import { useAgentMessages } from '../hooks/use-agent-messages'

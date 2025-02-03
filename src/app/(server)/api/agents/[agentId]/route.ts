@@ -22,7 +22,10 @@ async function getAgentById(
   }
 }
 
-async function modifyAgentById(req: NextRequest, { params }: { params: { agentId: string } }) {
+async function modifyAgentById(
+  req: NextRequest,
+  { params }: { params: { agentId: string } }
+) {
   const { agentId } = await params
   const body = await req.json()
 
@@ -41,8 +44,10 @@ async function modifyAgentById(req: NextRequest, { params }: { params: { agentId
   }
 }
 
-
-async function deleteAgentById(req: NextRequest, { params }: { params: { agentId: string } }) {
+async function deleteAgentById(
+  req: NextRequest,
+  { params }: { params: { agentId: string } }
+) {
   const { agentId } = await params
   try {
     await client.agents.delete(agentId)
@@ -52,7 +57,6 @@ async function deleteAgentById(req: NextRequest, { params }: { params: { agentId
     return NextResponse.json({ error: 'Error deleting agent' }, { status: 500 })
   }
 }
-
 
 export const GET = getAgentById
 export const PATCH = modifyAgentById

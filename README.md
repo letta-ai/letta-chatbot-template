@@ -14,24 +14,28 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 
 ## 📦 What's included
 
-- [Letta](https://github.com/letta-ai/letta)  
+- [Letta](https://github.com/letta-ai/letta)
+
   - Formerly known as MemGPT, Letta is an open-source framework designed for building **stateful LLM applications**. Our chatbot webapp template showcases powerful core features of Letta.
 
 - [Next.js 15+](https://nextjs.org)
+
   - We leverage Next.js for its **server-side rendering (SSR)** and other performance optimizations, ensuring a fast and seamless user experience.
 
 - [React](https://reactjs.org)
+
   - React provides a **component-based architecture**, enabling us to build **interactive and dynamic UIs** with reusable elements.
 
 - [TypeScript](https://www.typescriptlang.org)
+
   - TypeScript enhances our codebase with **static typing, improved maintainability, and better developer tooling**, reducing potential runtime errors.
 
 - [Shadcn UI](https://ui.shadcn.com)
+
   - Shadcn UI, built on [Tailwind CSS](https://tailwindcss.com), offers a collection of **modern, accessible UI components**, ensuring a cohesive and polished design.
 
 - [React Markdown](https://github.com/remarkjs/react-markdown)
   - React Markdown allows us to **render Markdown content seamlessly**, making it easier to display formatted text within our application.
-
 
 ---
 

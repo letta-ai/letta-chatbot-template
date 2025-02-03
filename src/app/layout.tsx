@@ -20,8 +20,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Letta Chatbot with Memory Template',
-  description: 'An example chatbot application built on the Letta API, which makes each chatbot a stateful agent (agent with memory) under the hood.',
-};
+  description:
+    'An example chatbot application built on the Letta API, which makes each chatbot a stateful agent (agent with memory) under the hood.'
+}
 
 export default function RootLayout({
   children

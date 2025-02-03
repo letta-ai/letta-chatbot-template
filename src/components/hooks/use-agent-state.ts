@@ -18,14 +18,14 @@ export function useModifyAgent(agentId: string) {
   return useMutation({
     mutationFn: (newData: { name: string }) => {
       return fetch(`/api/agents/${agentId}`, {
-          method: 'PATCH',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
-      }).then(response => response.json());
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newData)
+      }).then((response) => response.json())
     }
-  });
+  })
 }
 
 export function useDeleteAgent() {
@@ -34,9 +34,9 @@ export function useDeleteAgent() {
       return fetch(`/api/agents/${agentId}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(response => response.json());
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => response.json())
     }
-  });
+  })
 }

@@ -26,7 +26,7 @@ const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
   const { data } = useAgentState(agentId)
   const { mutate: modifyAgent } = useModifyAgent(agentId)
   const queryClient = useQueryClient()
-  const { setIsOpen } = useDialogDetails()
+  const { setDialogType } = useDialogDetails()
 
   const formSchema = z.object({
     agentName: z.string().min(1, {
@@ -63,7 +63,7 @@ const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
               })
             }
           )
-          setIsOpen(false)
+          setDialogType(null)
         }
       }
     )
@@ -86,7 +86,7 @@ const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
           )}
         />
         <div className='flex justify-end space-x-3'>
-          <Button variant='outline' onClick={() => setIsOpen(false)}>
+          <Button variant='outline' onClick={() => setDialogType(null)}>
             Cancel
           </Button>
           <Button variant='default' type='submit'>

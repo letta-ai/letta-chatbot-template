@@ -10,7 +10,7 @@ import {
 import { DialogType, useDialogDetails } from '../ui/agent-dialog'
 
 const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
-  const { setDialogType, setIsOpen } = useDialogDetails()
+  const { setDialogType } = useDialogDetails()
 
   return (
     <div className='flex'>
@@ -25,7 +25,6 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
                 id={`edit-agent-${agentId}`}
                 onClick={() => {
                   setDialogType(DialogType.EditAgent)
-                  setIsOpen(true)
                 }}
               >
                 <PenBox size={16} />
@@ -36,8 +35,6 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
                 className='text-red-500 hover:text-red-500 focus:text-red-500'
                 onClick={() => {
                   setDialogType(DialogType.DeleteAgent)
-                  setIsOpen(true)
-                  console.log('Delete Agent')
                 }}
               >
                 <Trash2Icon size={16} />

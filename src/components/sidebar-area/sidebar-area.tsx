@@ -29,7 +29,7 @@ export function SidebarArea() {
   const isConnected = useIsConnected()
   const { mutate: deleteAgent } = useDeleteAgent()
 
-  const { isOpen, setIsOpen, dialogType } = useDialogDetails()
+  const { dialogType, setDialogType } = useDialogDetails()
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list')
@@ -74,7 +74,8 @@ export function SidebarArea() {
             return updatedData
           }
         )
-        setIsOpen(false)
+        // setIsOpen(false)
+        setDialogType(null)
       }
     })
   }
@@ -137,13 +138,13 @@ export function SidebarArea() {
       </div>
 
       {data && data.length > 0 && <AppSidebar agents={data} />}
-      {isOpen && dialogType === DialogType.EditAgent && (
+      {dialogType === DialogType.EditAgent && (
         <AgentDialog
           title='Edit agent'
           content={<EditAgentForm agentId={agentId} />}
         />
       )}
-      {isOpen && dialogType === DialogType.DeleteAgent && (
+      {dialogType === DialogType.DeleteAgent && (
         <AgentDialog
           title='Delete agent?'
           content={

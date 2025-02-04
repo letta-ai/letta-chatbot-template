@@ -25,14 +25,18 @@ export const AppSidebarMenuButton: React.FC<{
         isActive={agent.id === agentId}
         className='overflow-hidden whitespace-nowrap h-full gap-0.5 text-gray-50 hover:text-black'
         onClick={() => {
-          if (isMobile) {
-            toggleSidebar()
-          }
           setAgentId(agent.id)
         }}
       >
         <div className='flex group justify-between'>
-          <div className='overflow-hidden flex-col'>
+          <div
+            className='overflow-hidden flex-col'
+            onClick={() => {
+              if (isMobile) {
+                toggleSidebar()
+              }
+            }}
+          >
             <span className='block w-full truncate text-primary'>
               {agent.name}
             </span>

@@ -29,7 +29,7 @@ export function SidebarArea() {
   const isConnected = useIsConnected()
   const { mutate: deleteAgent } = useDeleteAgent()
 
-  const { dialogType, setDialogType } = useDialogDetails()
+  const { dialogType, closeAgentDialog } = useDialogDetails()
 
   const scrollSidebarToTop = () => {
     const divToScroll = document.getElementById('agents-list')
@@ -74,8 +74,7 @@ export function SidebarArea() {
             return updatedData
           }
         )
-        // setIsOpen(false)
-        setDialogType(null)
+        closeAgentDialog()
       }
     })
   }

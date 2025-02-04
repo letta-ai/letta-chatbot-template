@@ -18,6 +18,8 @@ enum DialogType {
 interface DialogContextProps {
   dialogType: DialogType | null
   setDialogType: (type: DialogType | null) => void
+  openAgentDialog: (dialogType: DialogType) => void
+  closeAgentDialog: () => void
 }
 
 const DialogContext = createContext<DialogContextProps | undefined>(undefined)
@@ -26,9 +28,17 @@ const DialogContextProvider: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
   const [dialogType, setDialogType] = useState<DialogType | null>(null)
+  const openAgentDialog = (dialogType: DialogType) => {
+    setDialogType(dialogType)
+  }
+  const closeAgentDialog = () => {
+    setDialogType(null)
+  }
 
   return (
-    <DialogContext.Provider value={{ dialogType, setDialogType }}>
+    <DialogContext.Provider
+      value={{ dialogType, setDialogType, openAgentDialog, closeAgentDialog }}
+    >
       {children}
     </DialogContext.Provider>
   )
@@ -48,14 +58,14 @@ const AgentDialog: React.FC<{ title: string; content: React.ReactNode }> = ({
   title,
   content
 }) => {
-  const { setDialogType } = useDialogDetails()
+  const { setDialogType, closeAgentDialog } = useDialogDetails()
 
   return (
     <>
       <div
         className='fixed inset-0 z-50 bg-black/80'
         onClick={() => {
-          setDialogType(null)
+          closeAgentDialog()
         }}
       />
       <Card className='fixed inset-0 z-[100] flex items-center justify-center bg-transparent pointer-events-none'>

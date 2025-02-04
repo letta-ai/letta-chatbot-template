@@ -58,7 +58,7 @@ const AgentDialog: React.FC<{ title: string; content: React.ReactNode }> = ({
   title,
   content
 }) => {
-  const { setDialogType, closeAgentDialog } = useDialogDetails()
+  const { closeAgentDialog } = useDialogDetails()
 
   return (
     <>
@@ -68,7 +68,7 @@ const AgentDialog: React.FC<{ title: string; content: React.ReactNode }> = ({
           closeAgentDialog()
         }}
       />
-      <Card className='fixed inset-0 z-[100] flex items-center justify-center bg-transparent pointer-events-none'>
+      <Card className='fixed inset-0 z-[100] flex items-center justify-center bg-transparent pointer-events-none px-5'>
         <div className='bg-white rounded-lg shadow-lg max-w-lg w-full pointer-events-auto'>
           <CardHeader>
             <CardTitle>{title}</CardTitle>

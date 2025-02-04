@@ -77,7 +77,7 @@ const EditAgentForm: React.FC<{ agentId: string }> = ({ agentId }) => {
           name='agentName'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Agent Name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input placeholder='Enter a new agent name...' {...field} />
               </FormControl>

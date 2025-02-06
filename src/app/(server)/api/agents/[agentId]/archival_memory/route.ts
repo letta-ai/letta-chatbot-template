@@ -11,14 +11,7 @@ async function getAgentArchivalMemory(
     console.error('Error:', result)
     return result
   }
-  const { isValid, agentId } = result
-
-  if (!isValid) {
-    return NextResponse.json(
-      { error: 'Cannot find agent with associated user id' },
-      { status: 404 }
-    )
-  }
+  const { agentId } = result
 
   try {
     const archivalMemory = await client.agents.archivalMemory.list(agentId)

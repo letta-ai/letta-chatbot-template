@@ -11,15 +11,9 @@ async function getAgentById(
     console.error('Error:', result)
     return result
   }
-  const { isValid, agent } = result
+  const { agent } = result
 
   try {
-    if (!isValid) {
-      return NextResponse.json(
-        { error: 'Cannot find agent with associated user id' },
-        { status: 404 }
-      )
-    }
     return NextResponse.json(agent)
   } catch (error) {
     console.error('Error fetching agent:', error)
@@ -38,14 +32,7 @@ async function modifyAgentById(
     console.error('Error:', result)
     return result
   }
-  const { isValid, agentId } = result
-
-  if (!isValid) {
-    return NextResponse.json(
-      { error: 'Cannot find agent with associated user id' },
-      { status: 404 }
-    )
-  }
+  const { agentId } = result
 
   try {
     const updatedAgent = await client.agents.modify(agentId, body)
@@ -68,15 +55,9 @@ async function deleteAgentById(
     console.error('Error:', result)
     return result
   }
-  const { isValid, agentId } = result
+  const { agentId } = result
 
   try {
-    if (!isValid) {
-      return NextResponse.json(
-        { error: 'Cannot find agent with associated user id' },
-        { status: 404 }
-      )
-    }
     await client.agents.delete(agentId)
     return NextResponse.json({ message: 'Agent deleted successfully' })
   } catch (error) {

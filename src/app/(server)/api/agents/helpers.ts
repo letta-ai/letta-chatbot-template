@@ -21,8 +21,11 @@ export async function validateAgentOwner(
     return NextResponse.json({ error: 'Agent not found' }, { status: 404 })
   }
 
+  if (!agent.tags.includes(`user:${userId}`)) {
+    return NextResponse.json({ error: 'Cannot find agent with associated user id' }, { status: 404 })
+  }
+
   return {
-    isValid: agent.tags.includes(`user:${userId}`),
     userId: userId,
     agentId: agentId,
     agent: agent

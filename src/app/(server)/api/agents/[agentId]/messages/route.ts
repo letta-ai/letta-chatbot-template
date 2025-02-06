@@ -1,15 +1,34 @@
-import { NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import { filterMessages } from './helpers'
 import { Letta } from '@letta-ai/letta-client'
+import {
+  getAgent,
+  getAgentId,
+  getUserId,
+  validateAgentOwner
+} from '../../helpers'
+import { ROLE_TYPE } from '@/types'
 
 async function getAgentMessages(
-  _req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
+  }
+  const { isValid, agentId } = result
+
+  if (!isValid) {
+    return NextResponse.json(
+      { error: 'Cannot find agent with associated user id' },
+      { status: 404 }
+    )
+  }
+
   try {
-    const { agentId } = await params
     const messages = await client.agents.messages.list(agentId, {
       limit: 100
     })
@@ -26,8 +45,21 @@ async function sendMessage(
   req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
-  const { role, text } = await req.json()
-  const { agentId } = await params
+  const { text } = await req.json()
+
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
+  }
+  const { isValid, agentId } = result
+
+  if (!isValid) {
+    return NextResponse.json(
+      { error: 'Cannot find agent with associated user id' },
+      { status: 404 }
+    )
+  }
 
   // set up eventstream
   const encoder = new TextEncoder()
@@ -39,7 +71,7 @@ async function sendMessage(
           streamTokens: true,
           messages: [
             {
-              role,
+              role: ROLE_TYPE.USER,
               content: text
             }
           ]

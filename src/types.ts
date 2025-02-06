@@ -15,7 +15,7 @@ export enum MESSAGE_TYPE {
 }
 
 export enum ROLE_TYPE {
-    USER = 'user'
+  USER = 'user'
 }
 
 export const LETTA_UID = 'letta-uid'

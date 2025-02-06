@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
   if (!lettaUid) {
     lettaUid = uuid()
     response.cookies.set({
-      name:  LETTA_UID,
+      name: LETTA_UID,
       value: lettaUid,
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // expires 24 hours from now
     })

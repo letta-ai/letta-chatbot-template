@@ -20,7 +20,7 @@ async function getAgentMessages(
     return result
   }
   const { agentId } = result
-	
+
   try {
     const messages = await client.agents.messages.list(agentId, {
       limit: 100
@@ -45,14 +45,7 @@ async function sendMessage(
     console.error('Error:', result)
     return result
   }
-  const { isValid, agentId } = result
-
-  if (!isValid) {
-    return NextResponse.json(
-      { error: 'Cannot find agent with associated user id' },
-      { status: 404 }
-    )
-  }
+  const { agentId } = result
 
   // set up eventstream
   const encoder = new TextEncoder()

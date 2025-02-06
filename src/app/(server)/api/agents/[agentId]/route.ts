@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
-import { getAgent, getAgentId, getUserId, validateAgentOwner } from '../helpers'
+import { validateAgentOwner } from '../helpers'
 
 async function getAgentById(
   req: NextRequest,

@@ -2,12 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import { filterMessages } from './helpers'
 import { Letta } from '@letta-ai/letta-client'
-import {
-  getAgent,
-  getAgentId,
-  getUserId,
-  validateAgentOwner
-} from '../../helpers'
+import { validateAgentOwner } from '../../helpers'
 import { ROLE_TYPE } from '@/types'
 
 async function getAgentMessages(

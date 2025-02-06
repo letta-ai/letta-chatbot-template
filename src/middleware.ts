@@ -12,7 +12,10 @@ export function middleware(request: NextRequest) {
     response.cookies.set({
       name: LETTA_UID,
       value: lettaUid,
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // expires 24 hours from now
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // expires 24 hours from now
+      sameSite: 'lax', // Helps prevent csrf
+      httpOnly: true, // Prevents client-side access
+      secure: process.env.NODE_ENV === 'production' // send over https if we're on prod
     })
   }
   return response

@@ -11,11 +11,14 @@ import { UseSendMessageType } from '@/components/hooks/use-send-message'
 import { MESSAGE_TYPE } from '@/types'
 import { ReasoningMessageBlock } from '@/components/ui/reasoning-message'
 import { useReasoningMessage } from '@/components/toggle-reasoning-messages'
+import { AssistantMessageContent } from '@letta-ai/letta-client/api/types'
+import { extractMessageText } from '@/lib/utils'
 
 interface MessagesProps {
   isSendingMessage: boolean
   sendMessage: (options: UseSendMessageType) => void
 }
+
 
 export const Messages = (props: MessagesProps) => {
   const { isSendingMessage, sendMessage } = props
@@ -67,6 +70,7 @@ export const Messages = (props: MessagesProps) => {
     return messages.length === 3 && messages[0].message === DEFAULT_BOT_MESSAGE
   }, [messages])
 
+
   return (
     <div ref={messagesListRef} className='flex-1 overflow-auto'>
       <div className='group/message mx-auto w-full max-w-3xl px-4 h-full'>
@@ -86,7 +90,7 @@ export const Messages = (props: MessagesProps) => {
                     return (
                       <ReasoningMessageBlock
                         key={message.id}
-                        message={message.message}
+                        message={extractMessageText(message.message)}
                         isEnabled={isEnabled}
                       />
                     )
@@ -94,7 +98,7 @@ export const Messages = (props: MessagesProps) => {
                     return (
                       <MessagePill
                         key={message.id}
-                        message={message.message}
+                        message={extractMessageText(message.message)}
                         sender={message.messageType}
                       />
                     )

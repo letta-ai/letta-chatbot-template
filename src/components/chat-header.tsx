@@ -5,15 +5,20 @@ import { SkeletonLoadBlock } from './ui/skeleton-load-block'
 import { SidebarTrigger } from './ui/sidebar'
 import { ReasoningMessageSwitch } from './toggle-reasoning-messages'
 import { LoaderCircle } from 'lucide-react'
+import { useMemo } from 'react'
 
 export const ChatHeader: React.FC = () => {
   const { agentId } = useAgentContext()
   const { data: agentData, isLoading } = useAgents()
 
-  const selectedAgent =
-    agentData &&
-    agentData.length > 0 &&
-    agentData?.find((a) => a.id === agentId)
+  const selectedAgent = useMemo(() => {
+
+    if (!agentData) return null
+
+    if (agentData.length === 0) return null
+
+    return agentData.find((a) => a.id === agentId)
+  }, [agentData, agentId])
 
   return (
     <>

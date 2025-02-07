@@ -3,7 +3,7 @@ import { fetchEventSource } from '@microsoft/fetch-event-source'
 import { getAgentMessagesQueryKey } from './use-agent-messages'
 import { AppMessage, MESSAGE_TYPE, ROLE_TYPE } from '../../types'
 import * as Letta from '@letta-ai/letta-client/api'
-import { getMessageId } from '@/lib/utils'
+import { extractMessageText, getMessageId } from '@/lib/utils'
 
 export interface UseSendMessageType {
   agentId: string
@@ -64,6 +64,9 @@ export function useSendMessage() {
               )
 
               if (response.messageType === MESSAGE_TYPE.ASSISTANT_MESSAGE) {
+                // hack to remove the { "message": part of the response
+                const extractedMessage = extractMessageText(response.content).replace('{"message":"', '')
+
                 if (existingMessage) {
                   return data.map((message) => {
                     if (message.id === getMessageId(response)) {
@@ -71,7 +74,7 @@ export function useSendMessage() {
                         id: getMessageId(response),
                         date: new Date(response.date).getTime(),
                         messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
-                        message: `${existingMessage.message || ''}${response.content || ''}`
+                        message: `${existingMessage.message || ''}${extractedMessage || ''}`
                       }
                     }
                     return message
@@ -84,10 +87,7 @@ export function useSendMessage() {
                     id: getMessageId(response),
                     date: new Date(response.date).getTime(),
                     messageType: MESSAGE_TYPE.ASSISTANT_MESSAGE,
-                    message:
-                      typeof response.content === 'string'
-                        ? response.content
-                        : response.content?.map(content => content.text) || ''
+                    message: extractedMessage || ''
                   }
                 ]
               }

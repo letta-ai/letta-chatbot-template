@@ -19,3 +19,5 @@ export enum ROLE_TYPE {
 }
 
 export const LETTA_UID = 'letta-uid'
+
+export type Context<T> = { params: Promise<T> }

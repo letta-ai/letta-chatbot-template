@@ -89,5 +89,4 @@ export function filterMessages(data: Letta.LettaMessageUnion[]): AppMessage[] {
       // otherwise sort by date
       return a.date - b.date
     })
-
 }

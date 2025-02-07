@@ -3,12 +3,6 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { createContext, useContext, useState } from 'react'
-import { Button } from './button'
-import { AgentState } from '@letta-ai/letta-client/api'
-import { USE_AGENTS_KEY } from '../hooks/use-agents'
-import { useDeleteAgent } from '../hooks/use-agent-state'
-import { useQueryClient } from '@tanstack/react-query'
-import { useAgentContext } from '@/app/[agentId]/context/agent-context'
 
 enum DialogType {
   EditAgent = 'edit-agent',

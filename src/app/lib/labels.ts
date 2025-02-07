@@ -1,4 +1,5 @@
-export const DEFAULT_BOT_MESSAGE = 'Bootup sequence complete. Persona activated. Testing messaging functionality.'
+export const DEFAULT_BOT_MESSAGE =
+  'Bootup sequence complete. Persona activated. Testing messaging functionality.'
 export const NO_MESSAGES_LABEL = 'Start a chat...'
 
 export const MESSAGE_POPOVER_DESCRIPTION =

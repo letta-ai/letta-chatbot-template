@@ -5,7 +5,7 @@ import Markdown from 'react-markdown'
 
 interface MessagePillProps {
   message: string
-  sender: Letta.agents.MessagesListResponseItem['messageType']
+  sender: Letta.agents.LettaStreamingResponse['messageType']
 }
 
 const MessagePill: React.FC<MessagePillProps> = ({ message, sender }) => {

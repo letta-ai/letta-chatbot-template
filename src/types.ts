@@ -13,3 +13,9 @@ export enum MESSAGE_TYPE {
   TOOL_CALL_MESSAGE = 'tool_call_message',
   REASONING_MESSAGE = 'reasoning_message'
 }
+
+export enum ROLE_TYPE {
+  USER = 'user'
+}
+
+export const LETTA_UID = 'letta-uid'

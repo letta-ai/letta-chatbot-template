@@ -1,20 +1,19 @@
-import { NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
+import { validateAgentOwner } from '../helpers'
 
 async function getAgentById(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
-  const { agentId } = await params
-  if (!agentId) {
-    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 })
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
   }
+  const { agent } = result
+
   try {
-    const agent = await client.agents.retrieve(agentId)
-    if (!agent) {
-      return NextResponse.json({ error: 'Agent not found' }, { status: 404 })
-    }
     return NextResponse.json(agent)
   } catch (error) {
     console.error('Error fetching agent:', error)
@@ -26,12 +25,15 @@ async function modifyAgentById(
   req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
-  const { agentId } = await params
   const body = await req.json()
 
-  if (!agentId) {
-    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 })
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
   }
+  const { agentId } = result
+
   try {
     const updatedAgent = await client.agents.modify(agentId, body)
     if (!updatedAgent) {
@@ -48,7 +50,13 @@ async function deleteAgentById(
   req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
-  const { agentId } = await params
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
+  }
+  const { agentId } = result
+
   try {
     await client.agents.delete(agentId)
     return NextResponse.json({ message: 'Agent deleted successfully' })

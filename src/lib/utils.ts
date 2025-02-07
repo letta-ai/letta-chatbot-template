@@ -10,6 +10,7 @@ export const getMessageId = (message: Letta.agents.LettaStreamingResponse) => {
   if (message.messageType === 'usage_statistics') {
     return message.messageType
   }
-
-  return message.messageType + message.id
+  if ('id' in message) {
+    return message.messageType + message.id
+  }
 }

@@ -1,15 +1,18 @@
-import { NextApiRequest } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
+import { validateAgentOwner } from '../../helpers'
 
 async function getAgentArchivalMemory(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { agentId: string } }
 ) {
-  const { agentId } = await params
-  if (!agentId) {
-    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 })
+  const result = await validateAgentOwner(req, params)
+  if (result instanceof NextResponse) {
+    console.error('Error:', result)
+    return result
   }
+  const { agentId } = result
+
   try {
     const archivalMemory = await client.agents.archivalMemory.list(agentId)
 

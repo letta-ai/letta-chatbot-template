@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchEventSource } from '@microsoft/fetch-event-source'
 import { getAgentMessagesQueryKey } from './use-agent-messages'
-import { AppMessage, MESSAGE_TYPE } from '../../types'
+import { AppMessage, MESSAGE_TYPE, ROLE_TYPE } from '../../types'
 import * as Letta from '@letta-ai/letta-client/api'
 import { getMessageId } from '@/lib/utils'
 
@@ -43,7 +43,7 @@ export function useSendMessage() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ role: 'user', text }),
+        body: JSON.stringify({ role: ROLE_TYPE.USER, text }),
         onmessage: (message) => {
           const response = JSON.parse(
             message.data
@@ -87,7 +87,7 @@ export function useSendMessage() {
                     message:
                       typeof response.content === 'string'
                         ? response.content
-                        : response.content?.text || ''
+                        : response.content?.map(content => content.text) || ''
                   }
                 ]
               }

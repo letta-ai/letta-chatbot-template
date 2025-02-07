@@ -1,11 +1,19 @@
-import { NextApiRequest } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import defaultAgent from '@/default-agent'
+import { internalUserId, getUserId } from './helpers'
 
-async function getAgents(req: NextApiRequest) {
+async function getAgents(req: NextRequest) {
+  const userId = getUserId(req)
+  if (!userId) {
+    return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+  }
+
   try {
-    const agents = await client.agents.list()
+    const agents = await client.agents.list({
+      tags: internalUserId(userId),
+      matchAllTags: true
+    })
     const sortedAgents = agents.sort((a, b) => {
       const dateA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0
       const dateB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0
@@ -21,17 +29,23 @@ async function getAgents(req: NextApiRequest) {
   }
 }
 
-async function createAgent(req: NextApiRequest) {
+async function createAgent(req: NextRequest) {
   // ADD YOUR OWN AGENTS HERE
   const DEFAULT_MEMORY_BLOCKS = defaultAgent.DEFAULT_MEMORY_BLOCKS
   const DEFAULT_LLM = defaultAgent.DEFAULT_LLM
   const DEFAULT_EMBEDDING = defaultAgent.DEFAULT_EMBEDDING
 
+  const userId = getUserId(req)
+  if (!userId) {
+    return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
+  }
+
   try {
     const newAgent = await client.agents.create({
       memoryBlocks: DEFAULT_MEMORY_BLOCKS,
       model: DEFAULT_LLM,
-      embedding: DEFAULT_EMBEDDING
+      embedding: DEFAULT_EMBEDDING,
+      tags: [internalUserId(userId)]
     })
 
     return NextResponse.json(newAgent)

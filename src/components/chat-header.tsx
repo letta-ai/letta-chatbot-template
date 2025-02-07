@@ -31,10 +31,10 @@ export const ChatHeader: React.FC = () => {
               )}
             </div>
           </div>
-          <div className='flex h-[2em]'>
+          <div className='flex'>
             {isLoading ? (
               <LoaderCircle
-                className='flex w-max h-max animate-spin'
+                className='w-max h-full px-2 animate-spin'
                 size={17}
               />
             ) : (

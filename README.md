@@ -26,6 +26,7 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 <div align="center">
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fletta-ai%2Fletta-chatbot-template&env=LETTA_ACCESS_TOKEN,LETTA_SERVER_URL&envDescription=(Optional)%20Your%20Letta%20access%20token%3A%20set%20it%20to%20any%20arbitrary%20value%20if%20none%20is%20provided.%20Default%20server%20url%20is%20localhost%3A3000&envLink=https%3A%2F%2Fgithub.com%2Fletta-ai%2Fletta-chatbot-template&project-name=my-letta-chatbot&repository-name=my-letta-chatbot"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a></div>
 </div>
+
 > [!NOTE]
 > You must have a Letta server running to use this template. Follow this [quickstart guide](https://docs.letta.com/quickstart) to run your local Letta server.
 

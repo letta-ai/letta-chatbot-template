@@ -87,7 +87,7 @@ export function useSendMessage() {
                     message:
                       typeof response.content === 'string'
                         ? response.content
-                        : response.content?.text || ''
+                        : response.content?.map(content => content.text) || ''
                   }
                 ]
               }

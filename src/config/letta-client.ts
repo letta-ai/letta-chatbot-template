@@ -3,22 +3,22 @@ import { config } from 'dotenv'
 
 config()
 
-const LETTA_TOKEN = process.env.LETTA_TOKEN || 'DEFAULT_TOKEN'
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8283'
+const LETTA_ACCESS_TOKEN = process.env.LETTA_ACCESS_TOKEN || 'DEFAULT_TOKEN'
+const LETTA_SERVER_URL = process.env.LETTA_SERVER_URL || 'http://localhost:8283'
 
-if (!LETTA_TOKEN) {
+if (!LETTA_ACCESS_TOKEN) {
   console.error(
     "LETTTA_TOKEN is not set. You might not be able to use Letta's full functionality."
   )
 }
 
-if (!BASE_URL) {
+if (!LETTA_SERVER_URL) {
   console.error('BASE_URL is not set. We are using your localhost.')
 }
 
 const client = new LettaClient({
-  token: LETTA_TOKEN,
-  baseUrl: BASE_URL
+  token: LETTA_ACCESS_TOKEN,
+  baseUrl: LETTA_SERVER_URL
 })
 
 export default client

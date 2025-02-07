@@ -15,7 +15,7 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
   return (
     <div className='flex'>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Ellipsis size={16} />
@@ -42,10 +42,10 @@ const OptionsMenu: React.FC<{ agentId: string }> = ({ agentId }) => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <TooltipContent>
-            <span>Options</span>
-          </TooltipContent>
         </TooltipTrigger>
+        <TooltipContent>
+          <span>Options</span>
+        </TooltipContent>
       </Tooltip>
     </div>
   )

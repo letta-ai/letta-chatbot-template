@@ -1,4 +1,7 @@
 import { LettaClient } from '@letta-ai/letta-client'
+import { config } from 'dotenv'
+
+config()
 
 const LETTA_TOKEN = process.env.LETTA_TOKEN || 'DEFAULT_TOKEN'
 const BASE_URL = process.env.BASE_URL || 'http://localhost:8283'

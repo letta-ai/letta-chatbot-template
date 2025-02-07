@@ -12,7 +12,7 @@ export function AgentDetailDisplay() {
 
   return (
     <div
-      className={`bg-secondary transition-transform transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full w-0'} ${isMobile && isOpen ? 'flex-1' : ''}`}
+      className={`bg-secondary max-w-[450px] overflow-y-auto transition-transform transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full w-0'} ${isMobile && isOpen ? 'flex-1' : ''}`}
     >
       <AgentDetailDisplayContent />
     </div>

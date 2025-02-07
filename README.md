@@ -61,16 +61,18 @@ Clone the repository and run the app:
 
 ```bash
 # Clone the repository
-git clone https://github.com/letta-ai/demo-chat-app.git
+git clone git@github.com:letta-ai/letta-chatbot-template.git
 
 # Navigate to the project directory
-cd demo-chat-app
+cd letta-chatbot-template
 
 # Install dependencies
 npm install
 
 # Set environment variables
-export $(grep -v '^#' .env.template | xargs)
+cp .env.example .env
+
+# Update the .env file with your Letta server URL
 
 # Run the app
 npm run dev

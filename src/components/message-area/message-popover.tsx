@@ -21,9 +21,9 @@ export const MessagePopover = (props: MessagePopoverProps) => {
   return (
     <div className='flex flex-col items-center h-full justify-between'>
       <div className='flex top-component pt-20'>
-        <p className='text-center'>
+        <div className='text-center'>
           <Markdown>{MESSAGE_POPOVER_DESCRIPTION}</Markdown>
-        </p>
+        </div>
       </div>
       <div
         className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-2 w-full`}

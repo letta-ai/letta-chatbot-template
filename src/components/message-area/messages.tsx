@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { MessagePill } from '@/components/ui/message'
 import { useAgentContext } from '../../app/[agentId]/context/agent-context'
 import { useAgentMessages } from '../hooks/use-agent-messages'
@@ -59,13 +59,20 @@ export const Messages = (props: MessagesProps) => {
     }
   }, [messages, isSendingMessage])
 
+  const showPopover = useMemo(() => {
+    if (!messages) {
+      return false
+    }
+
+    return messages.length === 3 && messages[0].message === DEFAULT_BOT_MESSAGE
+  }, [messages])
+
   return (
     <div ref={messagesListRef} className='flex-1 overflow-auto'>
       <div className='group/message mx-auto w-full max-w-3xl px-4 h-full'>
         <div className='flex h-full'>
           {messages ? (
-            messages.length === 1 &&
-            messages[0].message === DEFAULT_BOT_MESSAGE ? (
+            showPopover ? (
               <MessagePopover sendMessage={sendMessage} key={messages[0].id} />
             ) : (
               <div className='flex min-w-0 flex-1 flex-col gap-6 pt-4'>

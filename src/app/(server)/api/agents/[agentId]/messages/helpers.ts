@@ -74,5 +74,20 @@ export function filterMessages(data: Letta.LettaMessageUnion[]): AppMessage[] {
   return data
     .map((item) => extractMessage(item))
     .filter((item) => item !== null)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort((a, b) => {
+      //// place reasoning_message always infront of the user message if they are in the same second
+      if (a.date === b.date) {
+        if (a.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
+          return -1
+        }
+
+        if (b.messageType === MESSAGE_TYPE.REASONING_MESSAGE) {
+          return 1
+        }
+      }
+
+      // otherwise sort by date
+      return a.date - b.date
+    })
+
 }

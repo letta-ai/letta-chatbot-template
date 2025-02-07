@@ -57,7 +57,7 @@ By default, the Letta server will run on `http://localhost:8283`.
 
 #### 🔸 Setup and run the app
 
-Clone the repository and run the app:
+1️⃣ Clone the repository and install dependencies:
 
 ```bash
 # Clone the repository
@@ -71,10 +71,15 @@ npm install
 
 # Set environment variables
 cp .env.template .env
+```
 
-# Update the .env file with your Letta server URL
+2️⃣ Update the `.env` file with your Letta server URL
 
-# Run the app
+3️⃣ Update the default agents in the `default-agents.json` file
+
+4️⃣ Run the app
+
+```bash
 npm run dev
 ```
 

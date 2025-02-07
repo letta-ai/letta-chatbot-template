@@ -3,13 +3,13 @@ import client from '@/config/letta-client'
 import { filterMessages } from './helpers'
 import { Letta } from '@letta-ai/letta-client'
 import { validateAgentOwner } from '../../helpers'
-import { ROLE_TYPE } from '@/types'
+import { Context, ROLE_TYPE } from '@/types'
 
 async function getAgentMessages(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     return result
   }
@@ -24,17 +24,20 @@ async function getAgentMessages(
     return NextResponse.json(result)
   } catch (error) {
     console.error('Error fetching messages:', error)
-    return {}
+    return NextResponse.json(
+      { error: 'Error fetching messages' },
+      { status: 500 }
+    )
   }
 }
 
 async function sendMessage(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
   const { text } = await req.json()
 
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     console.error('Error:', result)
     return result

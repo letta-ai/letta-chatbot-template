@@ -1,4 +1,4 @@
-import { getMessageId } from '@/lib/utils'
+import { extractMessageText, getMessageId } from '@/lib/utils'
 import { AppMessage, MESSAGE_TYPE } from '@/types'
 import * as Letta from '@letta-ai/letta-client/api'
 
@@ -23,8 +23,8 @@ function extractMessage(item: Letta.LettaMessageUnion): AppMessage | null {
       return null
     }
 
-    const message =
-      typeof item.content === 'string' ? item.content : item.content.text
+    const message = extractMessageText(item.content)
+
     if (!message) {
       return null
     }

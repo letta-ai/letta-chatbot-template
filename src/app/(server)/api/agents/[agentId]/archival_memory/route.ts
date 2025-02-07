@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import { validateAgentOwner } from '../../helpers'
+import { Context } from '@/types'
 
 async function getAgentArchivalMemory(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     return result
   }

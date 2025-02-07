@@ -1,17 +1,19 @@
 import client from '@/config/letta-client'
-import { LETTA_UID } from '@/types'
+import { Context, LETTA_UID } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function validateAgentOwner(
   req: NextRequest,
-  params: { agentId: string }
+  context: Context<{ agentId: string }>
 ) {
+
   const userId = getUserId(req)
   if (!userId) {
     return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
   }
 
-  const agentId = await getAgentId(params)
+  const { agentId } = await context.params;
+
   if (!agentId) {
     return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 })
   }

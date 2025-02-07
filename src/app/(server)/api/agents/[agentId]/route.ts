@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import { validateAgentOwner } from '../helpers'
+import { Context } from '@/types'
 
 async function getAgentById(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     return result
   }
@@ -22,11 +23,11 @@ async function getAgentById(
 
 async function modifyAgentById(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
   const body = await req.json()
 
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     return result
   }
@@ -46,9 +47,9 @@ async function modifyAgentById(
 
 async function deleteAgentById(
   req: NextRequest,
-  { params }: { params: { agentId: string } }
+  context: Context<{ agentId: string }>
 ) {
-  const result = await validateAgentOwner(req, params)
+  const result = await validateAgentOwner(req, context)
   if (result instanceof NextResponse) {
     console.error('Error:', result)
     return result

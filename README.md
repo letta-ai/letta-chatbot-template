@@ -70,7 +70,7 @@ cd letta-chatbot-template
 npm install
 
 # Set environment variables
-cp .env.example .env
+cp .env.template .env
 
 # Update the .env file with your Letta server URL
 

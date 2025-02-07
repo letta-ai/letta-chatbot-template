@@ -8,7 +8,6 @@ async function getAgentById(
 ) {
   const result = await validateAgentOwner(req, params)
   if (result instanceof NextResponse) {
-    console.error('Error:', result)
     return result
   }
   const { agent } = result
@@ -29,7 +28,6 @@ async function modifyAgentById(
 
   const result = await validateAgentOwner(req, params)
   if (result instanceof NextResponse) {
-    console.error('Error:', result)
     return result
   }
   const { agentId } = result

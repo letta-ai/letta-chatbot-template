@@ -8,14 +8,12 @@ async function getAgentArchivalMemory(
 ) {
   const result = await validateAgentOwner(req, params)
   if (result instanceof NextResponse) {
-    console.error('Error:', result)
     return result
   }
   const { agentId } = result
 
   try {
     const archivalMemory = await client.agents.archivalMemory.list(agentId)
-
     if (!archivalMemory) {
       return NextResponse.json(
         { error: 'Archival memory not found' },

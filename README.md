@@ -12,11 +12,40 @@
 
 Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agents that live forever and learn from experience.
 
-## 📦 What's included
+<div align="center">
+|
+  <a href="#-whats-included">What's included</a> · 
+  <a href="#-features">Features</a> · 
+  <a href="#-quickstart">Quickstart</a> · 
+  <a href="#-running-the-app-locally">Running the app locally</a>
+|
+</div>
+
+<div align="center" style="margin-top: 20px;">
+<div style="display: flex; justify-content: center; align-items: center;">
+  <div style="margin-right: 10px;">One-click deploy with Vercel 👉 </div>
+  <div><a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fletta-ai%2Fletta-chatbot-template&env=LETTA_ACCESS_TOKEN,LETTA_SERVER_URL&envDescription=(Optional)%20Your%20Letta%20access%20token%3A%20set%20it%20to%20any%20arbitrary%20value%20if%20none%20is%20provided.%20Default%20server%20url%20is%20localhost%3A3000&envLink=https%3A%2F%2Fgithub.com%2Fletta-ai%2Fletta-chatbot-template&project-name=my-letta-chatbot&repository-name=my-letta-chatbot"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a></div>
+</div>
+</div>
+
+> [!NOTE]
+> You must have a Letta server running to use this template. Follow this [quickstart guide](https://docs.letta.com/quickstart) to run your local Letta server.
+
+## ✨ Features
 
 - [Letta](https://github.com/letta-ai/letta)
 
-  - Formerly known as MemGPT, Letta is an open-source framework designed for building **stateful LLM applications**. Our chatbot webapp template showcases powerful core features of Letta.
+  - Formerly known as **MemGPT**, Letta is an open-source framework designed for building **stateful LLM applications**. Our chatbot webapp template showcases powerful core features of Letta.
+
+- Pseudo cookie-based session
+  - Different chat histories for different browsers. Tracks anonymous users across requests without requiring authentication.
+  - To view all agents, visit the [Agent Development Environment (ADE)](https://docs.letta.com/docs/agent-development-environment). The ADE provides a comprehensive interface for managing and interacting with your AI agents.
+
+## 📦 What's included
+
+- [Letta TypeScript SDK](https://github.com/letta-ai/letta-node)
+
+  - The Letta TypeScript library provides convenient access to the Letta API.
 
 - [Next.js 15+](https://nextjs.org)
 

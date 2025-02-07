@@ -14,9 +14,9 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 
 <div align="center">
 |
-  <a href="#-whats-included">What's included</a> · 
   <a href="#-features">Features</a> · 
-  <a href="#-quickstart">Quickstart</a> · 
+  <a href="#-whats-included">What's included</a> · 
+  <a href="#quickstart">Quickstart</a> · 
   <a href="#-running-the-app-locally">Running the app locally</a>
 |
 </div>

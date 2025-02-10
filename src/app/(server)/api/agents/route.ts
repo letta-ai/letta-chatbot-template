@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import defaultAgent from '@/default-agent'
-import { internalUserId, getUserId } from './helpers'
+import { getUserTagId, getUserId } from './helpers'
+import { USE_COOKIE_BASED_AUTHEHNTICATION } from '@/constants'
+
+function getAllAgents() {
+
+}
 
 async function getAgents(req: NextRequest) {
   const userId = getUserId(req)
@@ -11,7 +16,7 @@ async function getAgents(req: NextRequest) {
 
   try {
     const agents = await client.agents.list({
-      tags: internalUserId(userId),
+      tags: getUserTagId(userId),
       matchAllTags: true
     })
     const sortedAgents = agents.sort((a, b) => {
@@ -45,7 +50,7 @@ async function createAgent(req: NextRequest) {
       memoryBlocks: DEFAULT_MEMORY_BLOCKS,
       model: DEFAULT_LLM,
       embedding: DEFAULT_EMBEDDING,
-      tags: [internalUserId(userId)]
+      tags: getUserTagId(userId)
     })
 
     return NextResponse.json(newAgent)

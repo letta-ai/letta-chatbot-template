@@ -119,20 +119,23 @@ export function SidebarArea() {
           </Tooltip>
         </div>
         <div className='flex justify-end p-2'>
-          <Button
-            disabled={isPending}
-            type='button'
-            onClick={() => {
-              handleCreateAgent()
-            }}
-            className='inline-flex size-3 h-fit items-center justify-center whitespace-nowrap bg-transparent font-medium text-primary shadow-none ring-offset-background transition-colors hover:hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
-          >
-            {isPending ? (
-              <LoaderCircle className='animate-spin' size={17} />
-            ) : (
-              <PlusIcon width={16} height={16} />
-            )}
-          </Button>
+          {process.env.NEXT_PUBLIC_CREATE_AGENTS_FROM_UI === 'true' && (
+            <Button
+              disabled={isPending}
+              type='button'
+              onClick={() => {
+                handleCreateAgent()
+              }}
+              className='inline-flex size-3 h-fit items-center justify-center whitespace-nowrap bg-transparent font-medium text-primary shadow-none ring-offset-background transition-colors hover:hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+            >
+              {isPending ? (
+                <LoaderCircle className='animate-spin' size={17} />
+              ) : (
+                <PlusIcon width={16} height={16} />
+              )}
+            </Button>
+          )}
+
         </div>
       </div>
 

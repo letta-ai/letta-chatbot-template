@@ -41,7 +41,7 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
   - Define your agent state in the `default-agents.json` file. This file contains the initial state of your agents, including the llm model, persona, and other configurations.
 - Cookie-based sessions
   - Includes an implementation of cookie-based sessions to emulate users
-  - Can be disabled by setting `USE_COOKIE_BASED_AUTHEHNTICATION=false` to view all your agents from the ADE
+  - Can be disabled by setting `USE_COOKIE_BASED_AUTHENTICATION=false` to view all your agents from the ADE
   - Different chat histories for different browsers. Tracks anonymous users across requests without requiring authentication.
 
 ## 📦 What's included

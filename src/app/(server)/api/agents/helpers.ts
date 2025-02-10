@@ -1,7 +1,7 @@
 import client from '@/config/letta-client'
 import { Context, LETTA_UID } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
-import { USE_COOKIE_BASED_AUTHEHNTICATION } from '@/constants'
+import { USE_COOKIE_BASED_AUTHENTICATION } from '@/constants'
 
 export async function validateAgentOwner(
   req: NextRequest,
@@ -9,7 +9,7 @@ export async function validateAgentOwner(
 ) {
   const { agentId } = await context.params;
 
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
     return {
       userId: 'default',
       agentId,
@@ -44,7 +44,7 @@ export async function validateAgentOwner(
 }
 
 export function getUserTagId(userId: string) {
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
     return [];
   }
 
@@ -52,7 +52,7 @@ export function getUserTagId(userId: string) {
 }
 
 export function getUserId(req: NextRequest) {
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
     return 'default';
   }
 

@@ -19,7 +19,6 @@ interface MessagesProps {
   sendMessage: (options: UseSendMessageType) => void
 }
 
-
 export const Messages = (props: MessagesProps) => {
   const { isSendingMessage, sendMessage } = props
   const { agentId } = useAgentContext()
@@ -69,7 +68,6 @@ export const Messages = (props: MessagesProps) => {
 
     return messages.length === 3 && messages[0].message === DEFAULT_BOT_MESSAGE
   }, [messages])
-
 
   return (
     <div ref={messagesListRef} className='flex-1 overflow-auto'>

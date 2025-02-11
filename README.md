@@ -21,7 +21,7 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 |
 </div>
 
-### 
+###
 
 <div align="center">
 <h3>One-click deploy with Vercel</h3>
@@ -37,7 +37,7 @@ Deploy your own AI chatbot built on [Letta](https://www.letta.com/) with AI agen
 
   - Formerly known as **MemGPT**, Letta is an open-source framework designed for building **stateful LLM applications**. Our chatbot webapp template showcases powerful core features of Letta.
 
-- Static defined agent state 
+- Static defined agent state
   - Define your agent state in the `default-agents.json` file. This file contains the initial state of your agents, including the llm model, persona, and other configurations.
 - Cookie-based sessions
   - Includes an implementation of cookie-based sessions to emulate users
@@ -116,12 +116,13 @@ npm run dev
 ```
 
 ### Environment variables
+
 Environment variables can be controlled by setting them in your `.env` file or by setting them in your deployment environment.
 
-* `LETTA_ACCESS_TOKEN` - Your Letta access token, if not using cloud this is usually optiona.
-* `LETTA_SERVER_URL` - The URL of your Letta server. Default is `http://localhost:8283`.
-* `NEXT_PUBLIC_CREATE_AGENTS_FROM_UI` - If set to `true` will show a `+` button in the sidebar to create new agents from the `default-agents.json` file. Default is `true`.
-* `USE_COOKIE_BASED_AUTHENTICATION` - If set to `true` will use cookie-based sessions to emulate users. Default is `true`.
+- `LETTA_ACCESS_TOKEN` - Your Letta access token, if not using cloud this is usually optiona.
+- `LETTA_SERVER_URL` - The URL of your Letta server. Default is `http://localhost:8283`.
+- `NEXT_PUBLIC_CREATE_AGENTS_FROM_UI` - If set to `true` will show a `+` button in the sidebar to create new agents from the `default-agents.json` file. Default is `true`.
+- `USE_COOKIE_BASED_AUTHENTICATION` - If set to `true` will use cookie-based sessions to emulate users. Default is `true`.
 
 #### 🔸 See the app in action
 

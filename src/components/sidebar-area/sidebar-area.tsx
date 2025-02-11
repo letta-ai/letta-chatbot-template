@@ -135,7 +135,6 @@ export function SidebarArea() {
               )}
             </Button>
           )}
-
         </div>
       </div>
 

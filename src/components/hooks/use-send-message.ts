@@ -38,14 +38,17 @@ export function useSendMessage() {
         }
       )
 
-      await fetchEventSource(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ role: ROLE_TYPE.USER, text }),
-        onmessage: (message) => {
-          const response = JSON.parse(
+      const controller = new AbortController()
+      try {
+        await fetchEventSource(url, {
+          signal: controller.signal,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ role: ROLE_TYPE.USER, text }),
+          onmessage: (message) => {
+            const response = JSON.parse(
             message.data
           ) as Letta.agents.LettaStreamingResponse
           queryClient.setQueriesData<AppMessage[] | undefined>(
@@ -123,9 +126,13 @@ export function useSendMessage() {
           )
         }
       })
-    } catch (error) {
-      console.error('Error sending message:', error)
-    }
+    } finally {
+      // Invalidate the messages query after stream ends
+      queryClient.invalidateQueries({ queryKey: getAgentMessagesQueryKey(agentId) })
+    } 
+  } catch (error) {
+    console.error('Error sending message:', error)
+  }
   }
   return useMutation<void, undefined, UseSendMessageType>({
     mutationFn: (options) => sendMessage(options)

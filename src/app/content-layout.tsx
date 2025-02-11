@@ -16,15 +16,17 @@ export default function ContentLayout({
   const params = useParams()
   const { agentId: agentIdFromParams } = params
   const { data } = useAgents()
-  const { setAgentId } = useAgentContext()
+  const { agentId, setAgentId } = useAgentContext()
   const ref = useRef(false)
 
   useEffect(() => {
     if (data && data.length > 0 && !ref.current) {
-      setAgentId(data[0].id)
+      if (!agentId) {
+        setAgentId(data[0].id)
+      }
       ref.current = true
     }
-  }, [data, setAgentId, agentIdFromParams])
+  }, [data, agentId, setAgentId, agentIdFromParams])
 
   return (
     <>

@@ -1,19 +1,19 @@
 import client from '@/config/letta-client'
 import { Context, LETTA_UID } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
-import { USE_COOKIE_BASED_AUTHEHNTICATION } from '@/constants'
+import { USE_COOKIE_BASED_AUTHENTICATION } from '@/constants'
 
 export async function validateAgentOwner(
   req: NextRequest,
   context: Context<{ agentId: string }>
 ) {
-  const { agentId } = await context.params;
+  const { agentId } = await context.params
 
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
     return {
       userId: 'default',
       agentId,
-      agent:  getAgent(agentId),
+      agent: getAgent(agentId)
     }
   }
 
@@ -21,7 +21,6 @@ export async function validateAgentOwner(
   if (!userId) {
     return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
   }
-
 
   if (!agentId) {
     return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 })
@@ -44,21 +43,20 @@ export async function validateAgentOwner(
 }
 
 export function getUserTagId(userId: string) {
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
-    return [];
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
+    return []
   }
 
   return [`user:${userId}`]
 }
 
 export function getUserId(req: NextRequest) {
-  if (!USE_COOKIE_BASED_AUTHEHNTICATION) {
-    return 'default';
+  if (!USE_COOKIE_BASED_AUTHENTICATION) {
+    return 'default'
   }
 
   return req.cookies.get(LETTA_UID)?.value
 }
-
 
 export async function getAgent(agentId: string) {
   const agent = await client.agents.retrieve(agentId)

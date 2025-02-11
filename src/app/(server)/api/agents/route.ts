@@ -2,11 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import client from '@/config/letta-client'
 import defaultAgent from '@/default-agent'
 import { getUserTagId, getUserId } from './helpers'
-import { USE_COOKIE_BASED_AUTHEHNTICATION } from '@/constants'
-
-function getAllAgents() {
-
-}
 
 async function getAgents(req: NextRequest) {
   const userId = getUserId(req)
